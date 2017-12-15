@@ -12,6 +12,12 @@ let direction;
 let snake;
 let apples;
 
+const host = '192.168.0.24';
+const port = '81';
+const table = new tabLED(host, port);
+
+const pixelBuffer = new Uint32Array(BOARD_WIDTH * BOARD_HEIGHT);
+
 const containsCell = (list, cellToCheck) => {
   for (let cell of list) {
     if (cellsEqual(cell, cellToCheck)) {
@@ -157,6 +163,7 @@ const checkEatApples = () => {
   if (containsCell(apples, head)) {
     snake.grow();
     removeCell(apples, head);
+    table.draw(pixelBuffer);
   }
 };
 
@@ -188,11 +195,12 @@ const simulate = () => {
 
   checkEatApples();
 
-  render();
+  //renderHtml();
+  renderTable();
 };
 
 // TODO: don't create new elements every time.
-const render = () => {
+const renderHtml = () => {
 
   // clear board
   while (board.firstChild) {
@@ -226,6 +234,29 @@ const render = () => {
       row.appendChild(cell);
     }
   }
+};
+
+const renderTable = () => {
+
+  pixelBuffer.fill(0xFFFFFF);
+
+  for (let j = 0; j < BOARD_HEIGHT; j++) {
+    for (let i = 0; i < BOARD_WIDTH; i++) {
+
+      if (snake.coversCell([i, j])) {
+        pixelBuffer[j*BOARD_WIDTH + i]  = 0x0000FF;
+      }
+      else if (containsCell(apples, [i, j])) {
+        pixelBuffer[j*BOARD_WIDTH + i]  = 0xFF0000;
+      }
+      //else {
+      //  pixelBuffer[j*BOARD_WIDTH + i]  = 0xFFFFFF;
+      //}
+    }
+  }
+
+  table.draw(pixelBuffer);
+
 };
 
 init();

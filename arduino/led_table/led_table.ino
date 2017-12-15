@@ -13,10 +13,11 @@ WebSocketsServer webSocket = WebSocketsServer(81);
 
 #define USE_SERIAL Serial
 
-#define NUM_PIXELS 512
-#define DATA_PIN 2
+#define WIDTH 32
+#define HEIGHT 16
+#define NUM_PIXELS WIDTH * HEIGHT
 
-CRGB pixel[NUM_PIXELS];
+#define DATA_PIN 2
 
 const uint16_t PixelCount = 4;
 NeoPixelBus<NeoGrbFeature, NeoEsp8266Uart800KbpsMethod> strip(NUM_PIXELS, DATA_PIN);
@@ -50,17 +51,26 @@ void webSocketEvent(uint8_t num, WStype_t type, uint8_t * payload, size_t length
             //USE_SERIAL.printf("[%u] get binary length: %u\n", num, length);
             //hexdump(payload, length);
 
-            int *data_ptr = (int *)payload;
+            int *pixelBuffer = (int *)payload;
 
-            for (int i = 0; i < NUM_PIXELS; i++) {
-              //pixel[i] = (CRGB)data_ptr[i];
-              //uint8_t *bytes = (uint8_t *)(data_ptr[i]);
-              //strip.SetPixelColor(i, RgbColor(bytes[0], bytes[0], bytes[0]));
-              uint32_t color = data_ptr[i];
-              uint8_t r = (color >> 16) & 0x000000FF;
-              uint8_t g = (color >> 8) & 0x000000FF;
-              uint8_t b = (color >> 0) & 0x000000FF;
-              strip.SetPixelColor(i, RgbColor(r, g, b));
+            for (int j = 0; j < HEIGHT; j++) {
+
+              bool rowInverted = j % 2 == 0;
+              
+              for (int i = 0; i < WIDTH; i++) {
+                
+                int readIndex = j*WIDTH + i;
+                int writeIndex = readIndex;
+                
+                if (rowInverted) {
+                  writeIndex = j*WIDTH + (WIDTH - i - 1);
+                }
+                uint32_t color = pixelBuffer[readIndex];
+                uint8_t r = (color >> 16) & 0x000000FF;
+                uint8_t g = (color >> 8) & 0x000000FF;
+                uint8_t b = (color >> 0) & 0x000000FF;
+                strip.SetPixelColor(writeIndex, RgbColor(r, g, b));
+              }
             }
 
             strip.Show();
@@ -75,7 +85,7 @@ void webSocketEvent(uint8_t num, WStype_t type, uint8_t * payload, size_t length
 void setup() {
 
     WiFiManager wifiManager;
-    wifiManager.resetSettings();
+    //wifiManager.resetSettings();
     wifiManager.autoConnect("tabLED");
 
     while (WiFi.status() != WL_CONNECTED) {
