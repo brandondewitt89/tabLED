@@ -13,6 +13,7 @@
 #include <ESP8266WiFiMulti.h>
 #include <WebSocketsServer.h>
 #include <Hash.h>
+#include <WiFiManager.h>
 
 ESP8266WiFiMulti WiFiMulti;
 
@@ -82,6 +83,15 @@ void webSocketEvent(uint8_t num, WStype_t type, uint8_t * payload, size_t length
 
 void setup() {
 
+    WiFiManager wifiManager;
+    wifiManager.resetSettings();
+    wifiManager.autoConnect("tabLED");
+
+    while (WiFi.status() != WL_CONNECTED) {
+        delay(500);
+        Serial.print(".");
+    }
+
     //FastLED.addLeds<WS2812, DATA_PIN, GRB>(pixel, NUM_PIXELS);
 
     strip.Begin();
@@ -101,12 +111,6 @@ void setup() {
         USE_SERIAL.printf("[SETUP] BOOT WAIT %d...\n", t);
         USE_SERIAL.flush();
         delay(1000);
-    }
-
-    WiFiMulti.addAP("SSID", "PASSPHRASE");
-
-    while(WiFiMulti.run() != WL_CONNECTED) {
-        delay(100);
     }
 
     webSocket.begin();
