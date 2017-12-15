@@ -1,12 +1,4 @@
-/*
- * WebSocketServer.ino
- *
- *  Created on: 22.05.2015
- *
- */
-
 #include <Arduino.h>
-#include <FastLED.h>
 #include <NeoPixelBus.h>
 
 #include <ESP8266WiFi.h>
@@ -71,7 +63,6 @@ void webSocketEvent(uint8_t num, WStype_t type, uint8_t * payload, size_t length
               strip.SetPixelColor(i, RgbColor(r, g, b));
             }
 
-            //FastLED.show();
             strip.Show();
 
             // send message to client
@@ -92,10 +83,7 @@ void setup() {
         Serial.print(".");
     }
 
-    //FastLED.addLeds<WS2812, DATA_PIN, GRB>(pixel, NUM_PIXELS);
-
     strip.Begin();
-
 
     // USE_SERIAL.begin(921600);
     USE_SERIAL.begin(115200);
