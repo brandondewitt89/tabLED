@@ -3,14 +3,15 @@ const BOARD_WIDTH = 32;
 const BOARD_HEIGHT = 16;
 const CELL_WIDTH = '20px';
 const CELL_HEIGHT = CELL_WIDTH;
-const APPLE_DELAY_MILLISECONDS = 4000;
+const APPLE_DELAY_MILLISECONDS = 3000;
 const SIMULATOR_DELAY_MILLISECONDS = 150;
+const GROW_LENGTH = 2;
 
 const board = document.querySelector('#board');
 
-let direction;
-let snake;
 let apples;
+
+let players = [];
 
 const host = '192.168.0.24';
 const port = '81';
@@ -40,9 +41,13 @@ const removeCell = (list, cellToRemove) => {
 
 class Snake {
 
-  constructor() {
+  constructor(startCell) {
 
-    this._cells = [[0, 2], [0, 1], [0, 0]];
+    this._cells = [
+      startCell,
+      [startCell[0], startCell[1] - 1],
+      [startCell[0], startCell[1] - 2]
+    ];
     this._cellsToAdd = 0;
   }
 
@@ -79,7 +84,7 @@ class Snake {
   }
 
   grow() {
-    this._cellsToAdd++;
+    this._cellsToAdd += GROW_LENGTH;
   }
 
   getHead() {
@@ -104,19 +109,53 @@ class Snake {
 
 }
 
+window.addEventListener("gamepadconnected", function(e) {
+  console.log("Gamepad connected at index %d: %s. %d buttons, %d axes.",
+    e.gamepad.index, e.gamepad.id,
+    e.gamepad.buttons.length, e.gamepad.axes.length);
+});
+
 document.addEventListener('keydown', (event) => {
   switch (event.key) {
     case 'ArrowLeft':
-      direction = 'left';
+      if (players[0].direction !== 'right') {
+        players[0].direction = 'left';
+      }
       break;
     case 'ArrowRight':
-      direction = 'right';
+      if (players[0].direction !== 'left') {
+        players[0].direction = 'right';
+      }
       break;
     case 'ArrowUp':
-      direction = 'up';
+      if (players[0].direction !== 'down') {
+        players[0].direction = 'up';
+      }
       break;
     case 'ArrowDown':
-      direction = 'down';
+      if (players[0].direction !== 'up') {
+        players[0].direction = 'down';
+      }
+      break;
+    case 'a':
+      if (players[1].direction !== 'right') {
+        players[1].direction = 'left';
+      }
+      break;
+    case 'd':
+      if (players[1].direction !== 'left') {
+        players[1].direction = 'right';
+      }
+      break;
+    case 'w':
+      if (players[1].direction !== 'down') {
+        players[1].direction = 'up';
+      }
+      break;
+    case 's':
+      if (players[1].direction !== 'up') {
+        players[1].direction = 'down';
+      }
       break;
   }
 });
@@ -128,9 +167,31 @@ const randInRange = (min, max) => {
   return Math.floor(Math.random() * (max - min)) + min;
 };
 
+const PLAYER_TABLE = [
+  {
+    startCell: [0, 2],
+    direction: 'down',
+    color: 0x0000FF,
+  },
+  {
+    startCell: [BOARD_WIDTH - 1, 2],
+    direction: 'down',
+    color: 0xFFFF00,
+  },
+];
+
 const init = () => {
-  snake = new Snake();
-  direction = 'down';
+
+  players = [];
+
+  for (let i = 0; i < PLAYER_TABLE.length; i++) {
+    players.push({
+      snake: new Snake(PLAYER_TABLE[i].startCell),
+      direction: PLAYER_TABLE[i].direction,
+      color: PLAYER_TABLE[i].color,
+    });
+  }
+
   apples = [];
 };
 
@@ -139,37 +200,56 @@ const cellsEqual = (a, b) => {
 };
 
 const checkCollisions = () => {
-  const head = snake.getHead();
-  const cells = snake.getCells();
 
-  if (head[0] < 0 || head[0] >= BOARD_WIDTH ||
-      head[1] < 0 || head[1] >= BOARD_HEIGHT) {
-    return true;
-  }
+  for (let player of players) {
+    const head = player.snake.getHead();
+    const cells = player.snake.getCells();
 
-  // check for collisions with self
-  for (let i = 1; i < cells.length; i++) {
-
-    const cell = cells[i];
-    if (cellsEqual(head, cell)) {
+    if (head[0] < 0 || head[0] >= BOARD_WIDTH ||
+        head[1] < 0 || head[1] >= BOARD_HEIGHT) {
       return true;
+    }
+
+    // check for collisions with self
+    for (let i = 1; i < cells.length; i++) {
+
+      const cell = cells[i];
+      if (cellsEqual(head, cell)) {
+        return true;
+      }
+    }
+
+    // check collisions with other players
+    for (let p of players) {
+      if (p !== player) {
+
+        const cells = p.snake.getCells();
+
+        for (let i = 1; i < cells.length; i++) {
+
+          const cell = cells[i];
+          if (cellsEqual(head, cell)) {
+            return true;
+          }
+        }
+      }
     }
   }
 };
 
 const checkEatApples = () => {
-  const head = snake.getHead();
+  for (let player of players) {
+    const head = player.snake.getHead();
 
-  if (containsCell(apples, head)) {
-    snake.grow();
-    removeCell(apples, head);
-    table.draw(pixelBuffer);
+    if (containsCell(apples, head)) {
+      player.snake.grow();
+      removeCell(apples, head);
+      table.draw(pixelBuffer);
+    }
   }
 };
 
 const createRandomApple = () => {
-
-  console.log("creating apple");
 
   while (true) {
 
@@ -178,7 +258,17 @@ const createRandomApple = () => {
 
     const cell = [randX, randY];
 
-    if (!snake.coversCell(cell) && !containsCell(apples, cell)) {
+    let touchesNoSnakes = true;
+
+    for (let player of players) {
+
+      if (player.snake.coversCell(cell)) {
+        touchesNoSnakes = false;
+        break;
+      }
+    }
+
+    if (touchesNoSnakes && !containsCell(apples, cell)) {
       apples.push(cell);
       break;
     }
@@ -187,13 +277,17 @@ const createRandomApple = () => {
 
 const simulate = () => {
 
-  snake.move(direction);
+  for (let player of players) {
 
-  if (checkCollisions()) {
-    init();
+    player.snake.move(player.direction);
+
+    if (checkCollisions()) {
+      init();
+    }
+
+    checkEatApples();
+
   }
-
-  checkEatApples();
 
   //renderHtml();
   renderTable();
@@ -238,20 +332,22 @@ const renderHtml = () => {
 
 const renderTable = () => {
 
-  pixelBuffer.fill(0xFFFFFF);
+  pixelBuffer.fill(0x1F1F1F);
 
   for (let j = 0; j < BOARD_HEIGHT; j++) {
     for (let i = 0; i < BOARD_WIDTH; i++) {
 
-      if (snake.coversCell([i, j])) {
-        pixelBuffer[j*BOARD_WIDTH + i]  = 0x0000FF;
+      for (let player of players) {
+        if (player.snake.coversCell([i, j])) {
+          pixelBuffer[j*BOARD_WIDTH + i]  = player.color;
+        }
+        else if (containsCell(apples, [i, j])) {
+          pixelBuffer[j*BOARD_WIDTH + i]  = 0xFF0000;
+        }
+        //else {
+        //  pixelBuffer[j*BOARD_WIDTH + i]  = 0xFFFFFF;
+        //}
       }
-      else if (containsCell(apples, [i, j])) {
-        pixelBuffer[j*BOARD_WIDTH + i]  = 0xFF0000;
-      }
-      //else {
-      //  pixelBuffer[j*BOARD_WIDTH + i]  = 0xFFFFFF;
-      //}
     }
   }
 
