@@ -4,7 +4,7 @@ const BOARD_HEIGHT = 16;
 const CELL_WIDTH = '20px';
 const CELL_HEIGHT = CELL_WIDTH;
 const APPLE_DELAY_MILLISECONDS = 3000;
-const SIMULATOR_DELAY_MILLISECONDS = 150;
+const SIMULATOR_DELAY_MILLISECONDS = 100;
 const GROW_LENGTH = 2;
 
 const INIT_TABLE = [
@@ -59,6 +59,9 @@ class Snake {
     this.direction = direction;
     this.color = color;
 
+    this._nextMove = 'down';
+    this._maxQueueLength = 3;
+
     this._cells = [
       startCell,
       [startCell[0], startCell[1] - 1],
@@ -67,25 +70,66 @@ class Snake {
     this._cellsToAdd = 0;
   }
 
-  move(direction) {
+  setNextMove(direction) {
+
+    let newDirection = direction;
+
+    switch (direction) {
+      case 'left':
+        if (this.direction === 'right') {
+          newDirection = this.direction;
+        }
+        break;
+      case 'right':
+        if (this.direction === 'left') {
+          newDirection = this.direction;
+        }
+        break;
+      case 'up':
+        if (this.direction === 'down') {
+          newDirection = this.direction;
+        }
+        break;
+      case 'down':
+        if (this.direction === 'up') {
+          newDirection = this.direction;
+        }
+        break;
+    }
+
+    this._nextMove = newDirection;
+  }
+
+  updatePosition() {
+
+    this._move(this._nextMove);
+  }
+
+  _move(direction) {
 
     const head = this.getHead();
     const newHead = head.slice();
 
     switch (direction) {
       case 'left':
+
         newHead[0] -= 1;
         break;
       case 'right':
+
         newHead[0] += 1;
         break;
       case 'up':
+
         newHead[1] -= 1;
         break;
       case 'down':
+
         newHead[1] += 1;
         break;
     }
+
+    this.direction = direction;
 
     this._cells.unshift(newHead);
 
@@ -134,16 +178,16 @@ window.addEventListener("gamepadconnected", function(e) {
 document.addEventListener('keydown', (event) => {
   switch (event.key) {
     case 'ArrowLeft':
-      snakes[0].direction = 'left';
+      snakes[0].setNextMove('left');
       break;
     case 'ArrowRight':
-      snakes[0].direction = 'right';
+      snakes[0].setNextMove('right');
       break;
     case 'ArrowUp':
-      snakes[0].direction = 'up';
+      snakes[0].setNextMove('up');
       break;
     case 'ArrowDown':
-      snakes[0].direction = 'down';
+      snakes[0].setNextMove('down');
       break;
     case 'a':
       snakes[1].direction = 'left';
@@ -265,7 +309,9 @@ const simulate = () => {
 
   for (let snake of snakes) {
 
-    snake.move(snake.direction);
+    //snake.move(snake.direction);
+
+    snake.updatePosition();
 
     if (checkCollisions()) {
       init();
