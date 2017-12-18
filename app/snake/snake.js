@@ -22,6 +22,9 @@ const INIT_TABLE = [
 
 const board = document.querySelector('#board');
 
+const display = new BrowserDisplay(
+  BOARD_WIDTH, BOARD_HEIGHT);
+
 let apples;
 
 let snakes = [];
@@ -31,6 +34,7 @@ const port = '81';
 //const table = new tabLED(host, port);
 
 const pixelBuffer = new Uint32Array(BOARD_WIDTH * BOARD_HEIGHT);
+pixelBuffer.fill(0x00FFFF);
 
 const containsCell = (list, cellToCheck) => {
   for (let cell of list) {
@@ -321,51 +325,12 @@ const simulate = () => {
 
   }
 
-  renderHtml();
-  //renderTable();
+  render();
 };
 
-// TODO: don't create new elements every time.
-const renderHtml = () => {
+const render= () => {
 
-  // clear board
-  while (board.firstChild) {
-    board.removeChild(board.firstChild);
-  }
-
-  const table = document.createElement('table');
-  board.appendChild(table);
-
-  for (let j = 0; j < BOARD_HEIGHT; j++) {
-
-    const row = document.createElement('tr');
-    table.appendChild(row);
-
-    for (let i = 0; i < BOARD_WIDTH; i++) {
-
-      const cell = document.createElement('td');
-      cell.style.width = CELL_WIDTH;
-      cell.style.height = CELL_HEIGHT;
-
-      cell.style.backgroundColor = 'LightGray';
-
-      for (let snake of snakes) {
-        if (snake.coversCell([i, j])) {
-          cell.style.backgroundColor = '#0000FF';
-        }
-        else if (containsCell(apples, [i, j])) {
-          cell.style.backgroundColor = 'Tomato';
-        }
-      }
-
-      row.appendChild(cell);
-    }
-  }
-};
-
-const renderTable = () => {
-
-  pixelBuffer.fill(0x1F1F1F);
+  pixelBuffer.fill(0xCFCFCF);
 
   for (let j = 0; j < BOARD_HEIGHT; j++) {
     for (let i = 0; i < BOARD_WIDTH; i++) {
@@ -377,14 +342,11 @@ const renderTable = () => {
         else if (containsCell(apples, [i, j])) {
           pixelBuffer[j*BOARD_WIDTH + i]  = 0xFF0000;
         }
-        //else {
-        //  pixelBuffer[j*BOARD_WIDTH + i]  = 0xFFFFFF;
-        //}
       }
     }
   }
 
-  table.draw(pixelBuffer);
+  display.render(pixelBuffer);
 
 };
 
