@@ -19,6 +19,8 @@ const table = new tabLED(host, port);
 
 const pixelBuffer = new Uint32Array(BOARD_WIDTH * BOARD_HEIGHT);
 
+const display = new BrowserDisplay(
+  BOARD_WIDTH, BOARD_HEIGHT);
 
 class Pong {
 
@@ -153,44 +155,26 @@ const init = () => {
 };
 
 const simulate = () => {
-  renderHtml();
+  render();
 };
 
-// TODO: don't create new elements every time.
-const renderHtml = () => {
+const render= () => {
 
-  // clear board
-  while (board.firstChild) {
-    board.removeChild(board.firstChild);
-  }
-
-  const table = document.createElement('table');
-  board.appendChild(table);
+  pixelBuffer.fill(0xCFCFCF);
 
   for (let j = 0; j < BOARD_HEIGHT; j++) {
-
-    const row = document.createElement('tr');
-    table.appendChild(row);
-
     for (let i = 0; i < BOARD_WIDTH; i++) {
 
-      const cell = document.createElement('td');
-      cell.style.width = CELL_WIDTH;
-      cell.style.height = CELL_HEIGHT;
-
       if (pong.isPaddleCell([i, j])) {
-        cell.style.backgroundColor = 'SteelBlue';
+        pixelBuffer[j*BOARD_WIDTH + i]  = 0x0000FF;
       }
       else if (pong.isBallCell([i, j])) {
-        cell.style.backgroundColor = 'Tomato';
+        pixelBuffer[j*BOARD_WIDTH + i]  = 0xFF0000;
       }
-      else {
-        cell.style.backgroundColor = 'LightGray';
-      }
-
-      row.appendChild(cell);
     }
   }
+
+  display.render(pixelBuffer);
 };
 
 init();
