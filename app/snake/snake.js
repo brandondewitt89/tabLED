@@ -1,3 +1,5 @@
+// Description: Snake game for TabLED
+// Programmers: Anders Pitman, x, and Brandon DeWitt
 
 const BOARD_WIDTH = 32;
 const BOARD_HEIGHT = 16;
