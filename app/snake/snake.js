@@ -11,16 +11,16 @@ const BOARD_COLOR = 0x3C2F2F;
 const APPLE_COLOR = 0XC55452;
 const SCORE_COLOR = 0x9B6862;
 
-const NUM_ZERO = [ [1, 2], [1, 3], [1, 4], [2, 1], [2, 5], [3, 2], [3, 3], [3, 4] ];
-const NUM_ONE = [ [1, 2], [1, 5], [2, 1], [2, 2], [2, 3], [2, 4], [2, 5], [3, 5] ];
-const NUM_TWO = [ [1, 1], [1, 4], [1, 5], [2, 1], [2, 3], [2, 5], [3, 2], [3, 5] ];
-const NUM_THREE = [ [1, 1], [1, 5], [2, 1], [2, 3], [2, 5], [3, 1], [3, 2], [3, 3], [3, 4], [3, 5] ];
-const NUM_FOUR = [ [1, 1], [1, 2], [1, 3], [2, 3], [3, 1], [3, 2], [3, 3], [3, 4], [3, 5] ];
-const NUM_FIVE = [ [1, 1], [1, 2], [1, 3], [1, 5], [2, 1], [2, 3], [2, 5], [3, 1], [3, 3], [3, 4] ];
-const NUM_SIX = [ [1, 2], [1, 3], [1, 4], [1, 5], [2, 1], [2, 3], [2, 5], [3, 1], [3, 3], [3, 4], [3, 5] ];
-const NUM_SEVEN = [ [1, 1], [1, 4], [1, 5], [2, 1], [2, 3], [3, 1], [3, 2] ];
-const NUM_EIGHT = [ [1, 1], [1, 2], [1, 3], [1, 4], [1, 5], [2, 1], [2, 3], [2, 5], [3, 1], [3, 2], [3, 3], [3, 4], [3, 5] ];
-const NUM_NINE = [ [1, 1], [1, 2], [1, 3], [1, 5], [2, 1], [2, 3], [2, 5], [3, 1], [3, 2], [3, 3], [3, 4] ];
+const NUM_ZERO =  [ [0, 2], [0, 3], [0, 4], [1, 1], [1, 5], [2, 2], [2, 3], [2, 4] ];
+const NUM_ONE =   [ [0, 2], [0, 5], [1, 1], [1, 2], [1, 3], [1, 4], [1, 5], [2, 5] ];
+const NUM_TWO =   [ [0, 1], [0, 4], [0, 5], [1, 1], [1, 3], [1, 5], [2, 2], [2, 5] ];
+const NUM_THREE = [ [0, 1], [0, 5], [1, 1], [1, 3], [1, 5], [2, 1], [2, 2], [2, 3], [2, 4], [2, 5] ];
+const NUM_FOUR =  [ [0, 1], [0, 2], [0, 3], [1, 3], [2, 1], [2, 2], [2, 3], [2, 4], [2, 5] ];
+const NUM_FIVE =  [ [0, 1], [0, 2], [0, 3], [0, 5], [1, 1], [1, 3], [1, 5], [2, 1], [2, 3], [2, 4] ];
+const NUM_SIX =   [ [0, 2], [0, 3], [0, 4], [0, 5], [1, 1], [1, 3], [1, 5], [2, 1], [2, 3], [2, 4], [2, 5] ];
+const NUM_SEVEN = [ [0, 1], [0, 4], [0, 5], [1, 1], [1, 3], [2, 1], [2, 2] ];
+const NUM_EIGHT = [ [0, 1], [0, 2], [0, 3], [0, 4], [0, 5], [1, 1], [1, 3], [1, 5], [2, 1], [2, 2], [2, 3], [2, 4], [2, 5] ];
+const NUM_NINE =  [ [0, 1], [0, 2], [0, 3], [0, 5], [1, 1], [1, 3], [1, 5], [2, 1], [2, 2], [2, 3], [2, 4] ];
 
 const numPlayers = 1;
 const INIT_TABLE = [
@@ -202,152 +202,109 @@ class Snake {
         if (i === 0) {
           switch (scoreString[0]) {
 			case '0':
-              this.scoreCells = NUM_ZERO;
+              this.scoreCells = this.shiftScore(1, NUM_ZERO);
               break;
 			  
             case '1':
-              this.scoreCells = NUM_ONE;
+              this.scoreCells = this.shiftScore(1, NUM_ONE);
               break;
 			  
             case '2':
-              this.scoreCells = NUM_TWO;
+              this.scoreCells = this.shiftScore(1, NUM_TWO);
               break;
 			  
             case '3':
-              this.scoreCells = NUM_THREE;
+              this.scoreCells = this.shiftScore(1, NUM_THREE);
               break;
 			  
             case '4':
-              this.scoreCells = NUM_FOUR;
+              this.scoreCells = this.shiftScore(1, NUM_FOUR);
               break;
 			  
             case '5':
-              this.scoreCells = NUM_FIVE;
+              this.scoreCells = this.shiftScore(1, NUM_FIVE);
               break;
 			  
             case '6':
-              this.scoreCells = NUM_SIX;
+              this.scoreCells = this.shiftScore(1, NUM_SIX);
               break;
 			  
             case '7':
-              this.scoreCells = NUM_SEVEN;
+              this.scoreCells = this.shiftScore(1, NUM_SEVEN);
               break;
 			  
             case '8':
-              this.scoreCells = NUM_EIGHT;
+              this.scoreCells = this.shiftScore(1, NUM_EIGHT);
               break;
 			  
             case '9':
-              this.scoreCells = NUM_NINE;
+              this.scoreCells = this.shiftScore(1, NUM_NINE);
           }
         }
         else if (i === 1) {
           switch (scoreString[1]) {
             case '0':
-              this.scoreCells = this.scoreCells.concat([
-                [5, 2], [5, 3], [5, 4], [6, 1], [6, 5], [7, 2], [7, 3], [7, 4]
-              ])
+              this.scoreCells = this.scoreCells.concat(this.shiftScore(5, NUM_ZERO));
               break;
             case '1':
-			  this.scoreCells = this.scoreCells.concat(this.shiftScore(4, NUM_ONE))
-            // this.scoreCells = this.scoreCells.concat([
-                // [5, 2], [5, 5], [6, 1], [6, 2], [6, 3], [6, 4], [6, 5], [7, 5]
-              // ])
+			  this.scoreCells = this.scoreCells.concat(this.shiftScore(5, NUM_ONE));
               break;
             case '2':
-            this.scoreCells = this.scoreCells.concat([
-                [5, 1], [5, 4], [5, 5], [6, 1], [6, 3], [6, 5], [7, 2], [7, 5]
-              ])
+              this.scoreCells = this.scoreCells.concat(this.shiftScore(5, NUM_TWO));
               break;
             case '3':
-            this.scoreCells = this.scoreCells.concat([
-                [5, 1], [5, 5], [6, 1], [6, 3], [6, 5], [7, 1], [7, 2], [7, 3], [7, 4], [7, 5]
-              ])
+              this.scoreCells = this.scoreCells.concat(this.shiftScore(5, NUM_THREE));
               break;
             case '4':
-            this.scoreCells = this.scoreCells.concat([
-                [5, 1], [5, 2], [5, 3], [6, 3], [7, 1], [7, 2], [7, 3], [7, 4], [7, 5]
-              ])
+              this.scoreCells = this.scoreCells.concat(this.shiftScore(5, NUM_FOUR));
               break;
             case '5':
-            this.scoreCells = this.scoreCells.concat([
-                [5, 1], [5, 2], [5, 3], [5, 5], [6, 1], [6, 3], [6, 5], [7, 1], [7, 3], [7, 4]
-              ])
+              this.scoreCells = this.scoreCells.concat(this.shiftScore(5, NUM_FIVE));
               break;
-
             case '6':
-            this.scoreCells = this.scoreCells.concat([
-                [5, 2], [5, 3], [5, 4], [5, 5], [6, 1], [6, 3], [6, 5], [7, 1], [7, 3], [7, 4], [7, 5]
-              ])
+              this.scoreCells = this.scoreCells.concat(this.shiftScore(5, NUM_SIX));
               break;
             case '7':
-            this.scoreCells = this.scoreCells.concat([
-                [5, 1], [5, 4], [5, 5], [6, 1], [6, 3], [7, 1], [7, 2]
-              ])
+              this.scoreCells = this.scoreCells.concat(this.shiftScore(5, NUM_SEVEN));
               break;
             case '8':
-            this.scoreCells = this.scoreCells.concat([
-                [5, 1], [5, 2], [5, 3], [5, 4], [5, 5], [6, 1], [6, 3], [6, 5], [7, 1], [7, 2], [7, 3], [7, 4], [7, 5]
-              ])
+              this.scoreCells = this.scoreCells.concat(this.shiftScore(4, NUM_EIGHT));
               break;
             case '9':
-            this.scoreCells = this.scoreCells.concat([
-                [5, 1], [5, 2], [5, 3], [5, 5], [6, 1], [6, 3], [6, 5], [7, 1], [7, 2], [7, 3], [7, 4]
-              ])
+              this.scoreCells = this.scoreCells.concat(this.shiftScore(4, NUM_NINE));
           }
         }
         else if (i === 2) {
           switch (scoreString[2]) {
             case '0':
-              this.scoreCells = this.scoreCells.concat([
-                [9, 2], [9, 3], [9, 4], [10, 1], [10, 5], [11, 2], [11, 3], [11, 4]
-              ])
+              this.scoreCells = this.scoreCells.concat(this.shiftScore(9, NUM_ZERO));
               break;
             case '1':
-            this.scoreCells = this.scoreCells.concat([
-                [9, 2], [9, 5], [10, 1], [10, 2], [10, 3], [10, 4], [10, 5], [11, 5]
-              ])
+			  this.scoreCells = this.scoreCells.concat(this.shiftScore(9, NUM_ONE));
               break;
             case '2':
-            this.scoreCells = this.scoreCells.concat([
-                [9, 1], [9, 4], [9, 5], [10, 1], [10, 3], [10, 5], [11, 2], [11, 5]
-              ])
+              this.scoreCells = this.scoreCells.concat(this.shiftScore(9, NUM_TWO));
               break;
             case '3':
-            this.scoreCells = this.scoreCells.concat([
-                [9, 1], [9, 5], [10, 1], [10, 3], [10, 5], [11, 1], [11, 2], [11, 3], [11, 4], [11, 5]
-              ])
+              this.scoreCells = this.scoreCells.concat(this.shiftScore(9, NUM_THREE));
               break;
             case '4':
-            this.scoreCells = this.scoreCells.concat([
-                [9, 1], [9, 2], [9, 3], [10, 3], [11, 1], [11, 2], [11, 3], [11, 4], [11, 5]
-              ])
+              this.scoreCells = this.scoreCells.concat(this.shiftScore(9, NUM_FOUR));
               break;
             case '5':
-            this.scoreCells = this.scoreCells.concat([
-                [9, 1], [9, 2], [9, 3], [9, 5], [10, 1], [10, 3], [10, 5], [11, 1], [11, 3], [11, 4]
-              ])
+              this.scoreCells = this.scoreCells.concat(this.shiftScore(9, NUM_FIVE));
               break;
-
             case '6':
-            this.scoreCells = this.scoreCells.concat([
-                [9, 2], [9, 3], [9, 4], [9, 5], [10, 1], [10, 3], [10, 5], [11, 1], [11, 3], [11, 4], [11, 5]
-              ])
+              this.scoreCells = this.scoreCells.concat(this.shiftScore(9, NUM_SIX));
               break;
             case '7':
-            this.scoreCells = this.scoreCells.concat([
-                [9, 1], [9, 4], [9, 5], [10, 1], [10, 3], [11, 1], [11, 2]
-              ])
+              this.scoreCells = this.scoreCells.concat(this.shiftScore(9, NUM_SEVEN));
               break;
             case '8':
-            this.scoreCells = this.scoreCells.concat([
-                [9, 1], [9, 2], [9, 3], [9, 4], [9, 5], [10, 1], [10, 3], [10, 5], [11, 1], [11, 2], [11, 3], [11, 4], [11, 5]
-              ])
+              this.scoreCells = this.scoreCells.concat(this.shiftScore(9, NUM_EIGHT));
               break;
             case '9':
-            this.scoreCells = this.scoreCells.concat([
-                [9, 1], [9, 2], [9, 3], [9, 5], [10, 1], [10, 3], [10, 5], [11, 1], [11, 2], [11, 3], [11, 4]
-              ])
+              this.scoreCells = this.scoreCells.concat(this.shiftScore(9, NUM_NINE));
           }
         }
       }
@@ -524,7 +481,7 @@ class Snake {
 	let shiftedNumber = [];
 	for (let [i, j] of number) {
 		i += shiftBy;
-		shiftedNumber = shiftedNumber.concat([i, j])
+		shiftedNumber = shiftedNumber.concat([[i, j]])
 	}
 	return shiftedNumber;
   }
