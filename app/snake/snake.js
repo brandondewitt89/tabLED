@@ -8,8 +8,7 @@ const SIMULATOR_DELAY_MILLISECONDS = 100;
 const GROW_LENGTH = 2;
 
 const BOARD_COLOR = 0x3C2F2F;
-const APPLE_COLOR = 0XC55452;
-const SCORE_COLOR = 0x9B6862;
+const APPLE_COLOR = 0X7F9352;
 
 const NUM_ZERO =  [ [0, 2], [0, 3], [0, 4], [1, 1], [1, 5], [2, 2], [2, 3], [2, 4] ];
 const NUM_ONE =   [ [0, 2], [0, 5], [1, 1], [1, 2], [1, 3], [1, 4], [1, 5], [2, 5] ];
@@ -27,15 +26,15 @@ const INIT_TABLE = [
   {
     startCell: [0, 2],
     direction: 'down',
-    bodyColor: 0xF0F0A0,
-    scoreColor: 0x909060,
+    bodyColor: 0x938552,
+    scoreColor: 0x655208,
     player: 0
   },
   {
     startCell: [BOARD_WIDTH - 1, 2],
     direction: 'down',
-    bodyColor: 0xA0F0F0,
-    scoreColor: 0x609090,
+    bodyColor: 0x936552,
+    scoreColor: 0x652408,
     player:1
   },
 ];
@@ -259,10 +258,10 @@ class Snake {
               this.scoreCells = this.scoreCells.concat(this.shiftScore(5, NUM_SEVEN));
               break;
             case '8':
-              this.scoreCells = this.scoreCells.concat(this.shiftScore(4, NUM_EIGHT));
+              this.scoreCells = this.scoreCells.concat(this.shiftScore(5, NUM_EIGHT));
               break;
             case '9':
-              this.scoreCells = this.scoreCells.concat(this.shiftScore(4, NUM_NINE));
+              this.scoreCells = this.scoreCells.concat(this.shiftScore(5, NUM_NINE));
           }
         }
         else if (i === 2) {
@@ -413,56 +412,6 @@ class Snake {
 	}
 	return shiftedNumber;
   }
-  // shiftScore(player, digit, number) {
-	  // switch (player) {
-		// case 0:
-		  // switch (digit) {
-			// case 0:
-			  // return number;
-			  // break;
-			
-			// case 1:
-			  // for (let [i, j] of number) {
-				  // i += 4;
-			  // }
-			  // return number;
-			  // break;
-			
-			// case 2:
-			  // for (let [i, j] of number) {
-				  // i += 8;
-			  // }
-			  // return number;
-			  // break;
-		  // }
-		  // break;
-		
-		// case 1:
-		  // switch (digit) {
-			// case 0:
-			  // for (let [i, j] of number) {
-				  // i += 19;
-			  // }
-			  // return number;
-			  // break;
-			
-			// case 1:
-			  // for (let [i, j] of number) {
-				  // i += 23;
-			  // }
-			  // return number;
-			  // break;
-			
-			// case 2:
-			  // for (let [i, j] of number) {
-				  // i += 27;
-			  // }
-			  // return number;
-			  // break;
-		  // }
-		  // break;
-	  // }
-  // }
 }
 
 window.addEventListener("gamepadconnected", function(e) {
@@ -619,10 +568,6 @@ const simulate = () => {
 
     snake.convertScoreToCells(snake.player);
   }
-
-  // for (let score of scores) {
-  //   score.convertScoreToCells(snakeLength[score.player], score.player);
-  // }
 
   render();
 };
