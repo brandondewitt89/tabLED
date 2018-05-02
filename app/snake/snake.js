@@ -200,49 +200,40 @@ class Snake {
     if (player === 0) {
       for (let i = 0; i < scoreString.length; i++) {
         if (i === 0) {
-          switch (scoreString[0]) {
+          switch (scoreString[i]) {
 			case '0':
               this.scoreCells = this.shiftScore(1, NUM_ZERO);
               break;
-			  
             case '1':
               this.scoreCells = this.shiftScore(1, NUM_ONE);
               break;
-			  
             case '2':
               this.scoreCells = this.shiftScore(1, NUM_TWO);
               break;
-			  
             case '3':
               this.scoreCells = this.shiftScore(1, NUM_THREE);
               break;
-			  
             case '4':
               this.scoreCells = this.shiftScore(1, NUM_FOUR);
               break;
-			  
             case '5':
               this.scoreCells = this.shiftScore(1, NUM_FIVE);
               break;
-			  
             case '6':
               this.scoreCells = this.shiftScore(1, NUM_SIX);
               break;
-			  
             case '7':
               this.scoreCells = this.shiftScore(1, NUM_SEVEN);
               break;
-			  
             case '8':
               this.scoreCells = this.shiftScore(1, NUM_EIGHT);
               break;
-			  
             case '9':
               this.scoreCells = this.shiftScore(1, NUM_NINE);
           }
         }
         else if (i === 1) {
-          switch (scoreString[1]) {
+          switch (scoreString[i]) {
             case '0':
               this.scoreCells = this.scoreCells.concat(this.shiftScore(5, NUM_ZERO));
               break;
@@ -275,7 +266,7 @@ class Snake {
           }
         }
         else if (i === 2) {
-          switch (scoreString[2]) {
+          switch (scoreString[i]) {
             case '0':
               this.scoreCells = this.scoreCells.concat(this.shiftScore(9, NUM_ZERO));
               break;
@@ -312,165 +303,102 @@ class Snake {
     else if (player === 1) {
       for (let i = 0; i < scoreString.length; i++) {
         if (i === 0) {
-          switch (scoreString[0]) {
-            case '0':
-              this.scoreCells = [
-                [20, 2], [20, 3], [20, 4], [21, 1], [21, 5], [22, 2], [22, 3], [22, 4]
-              ]
+          switch (scoreString[scoreString.length - i - 1]) {
+			case '0':
+              this.scoreCells = this.shiftScore(28, NUM_ZERO);
               break;
             case '1':
-              this.scoreCells = [
-                [20, 2], [20, 5], [21, 1], [21, 2], [21, 3], [21, 4], [21, 5], [22, 5]
-              ]
+              this.scoreCells = this.shiftScore(28, NUM_ONE);
               break;
             case '2':
-              this.scoreCells = [
-                [20, 1], [20, 4], [20, 5], [21, 1], [21, 3], [21, 5], [22, 2], [22, 5]
-              ]
+              this.scoreCells = this.shiftScore(28, NUM_TWO);
               break;
             case '3':
-              this.scoreCells = [
-                [20, 1], [20, 5], [21, 1], [21, 3], [21, 5], [22, 1], [22, 2], [22, 3], [22, 4], [22, 5]
-              ]
+              this.scoreCells = this.shiftScore(28, NUM_THREE);
               break;
             case '4':
-              this.scoreCells = [
-                [20, 1], [20, 2], [20, 3], [21, 3], [22, 1], [22, 2], [22, 3], [22, 4], [22, 5]
-              ]
+              this.scoreCells = this.shiftScore(28, NUM_FOUR);
               break;
             case '5':
-              this.scoreCells = [
-                [20, 1], [20, 2], [20, 3], [20, 5], [21, 1], [21, 3], [21, 5], [22, 1], [22, 3], [22, 4]
-              ]
+              this.scoreCells = this.shiftScore(28, NUM_FIVE);
               break;
-
             case '6':
-              this.scoreCells = [
-                [20, 2], [20, 3], [20, 4], [20, 5], [2, 1], [2, 3], [2, 5], [3, 1], [3, 3], [3, 4], [3, 5]
-              ]
+              this.scoreCells = this.shiftScore(28, NUM_SIX);
               break;
             case '7':
-              this.scoreCells = [
-                [20, 1], [20, 4], [20, 5], [21, 1], [21, 3], [22, 1], [22, 2]
-              ]
+              this.scoreCells = this.shiftScore(28, NUM_SEVEN);
               break;
             case '8':
-              this.scoreCells = [
-                [20, 1], [20, 2], [20, 3], [20, 4], [20, 5], [21, 1], [21, 3], [21, 5], [22, 1], [22, 2], [22, 3], [22, 4], [22, 5]
-              ]
+              this.scoreCells = this.shiftScore(28, NUM_EIGHT);
               break;
             case '9':
-              this.scoreCells = [
-                [20, 1], [20, 2], [20, 3], [20, 5], [21, 1], [21, 3], [21, 5], [22, 1], [22, 2], [22, 3], [22, 4]
-              ]
+              this.scoreCells = this.shiftScore(28, NUM_NINE);
           }
         }
         else if (i === 1) {
-          switch (scoreString[1]) {
+          switch (scoreString[scoreString.length - i - 1]) {
             case '0':
-              this.scoreCells = this.scoreCells.concat([
-                [24, 2], [24, 3], [24, 4], [25, 1], [25, 5], [26, 2], [26, 3], [26, 4]
-              ])
+              this.scoreCells = this.scoreCells.concat(this.shiftScore(24, NUM_ZERO));
               break;
             case '1':
-            this.scoreCells = this.scoreCells.concat([
-                [24, 2], [24, 5], [25, 1], [25, 2], [25, 3], [25, 4], [25, 5], [26, 5]
-              ])
+			  this.scoreCells = this.scoreCells.concat(this.shiftScore(24, NUM_ONE));
               break;
             case '2':
-            this.scoreCells = this.scoreCells.concat([
-                [24, 1], [24, 4], [24, 5], [25, 1], [25, 3], [25, 5], [26, 2], [26, 5]
-              ])
+              this.scoreCells = this.scoreCells.concat(this.shiftScore(24, NUM_TWO));
               break;
             case '3':
-            this.scoreCells = this.scoreCells.concat([
-                [24, 1], [24, 5], [25, 1], [25, 3], [25, 5], [26, 1], [26, 2], [26, 3], [26, 4], [26, 5]
-              ])
+              this.scoreCells = this.scoreCells.concat(this.shiftScore(24, NUM_THREE));
               break;
             case '4':
-            this.scoreCells = this.scoreCells.concat([
-                [24, 1], [24, 2], [24, 3], [25, 3], [26, 1], [26, 2], [26, 3], [26, 4], [26, 5]
-              ])
+              this.scoreCells = this.scoreCells.concat(this.shiftScore(24, NUM_FOUR));
               break;
             case '5':
-            this.scoreCells = this.scoreCells.concat([
-                [24, 1], [24, 2], [24, 3], [24, 5], [25, 1], [25, 3], [25, 5], [26, 1], [26, 3], [26, 4]
-              ])
+              this.scoreCells = this.scoreCells.concat(this.shiftScore(24, NUM_FIVE));
               break;
-
             case '6':
-            this.scoreCells = this.scoreCells.concat([
-                [24, 2], [24, 3], [24, 4], [24, 5], [25, 1], [25, 3], [25, 5], [26, 1], [26, 3], [26, 4], [26, 5]
-              ])
+              this.scoreCells = this.scoreCells.concat(this.shiftScore(24, NUM_SIX));
               break;
             case '7':
-            this.scoreCells = this.scoreCells.concat([
-                [24, 1], [24, 4], [24, 5], [25, 1], [25, 3], [26, 1], [26, 2]
-              ])
+              this.scoreCells = this.scoreCells.concat(this.shiftScore(24, NUM_SEVEN));
               break;
             case '8':
-            this.scoreCells = this.scoreCells.concat([
-                [24, 1], [24, 2], [24, 3], [24, 4], [24, 5], [25, 1], [25, 3], [25, 5], [26, 1], [26, 2], [26, 3], [26, 4], [26, 5]
-              ])
+              this.scoreCells = this.scoreCells.concat(this.shiftScore(24, NUM_EIGHT));
               break;
             case '9':
-            this.scoreCells = this.scoreCells.concat([
-                [24, 1], [24, 2], [24, 3], [24, 5], [25, 1], [25, 3], [25, 5], [26, 1], [26, 2], [26, 3], [26, 4]
-              ])
+              this.scoreCells = this.scoreCells.concat(this.shiftScore(24, NUM_NINE));
           }
         }
         else if (i === 2) {
-          switch (scoreString[2]) {
+          switch (scoreString[scoreString.length - i - 1]) {
             case '0':
-              this.scoreCells = this.scoreCells.concat([
-                [28, 2], [28, 3], [28, 4], [29, 1], [29, 5], [30, 2], [30, 3], [30, 4]
-              ])
+              this.scoreCells = this.scoreCells.concat(this.shiftScore(20, NUM_ZERO));
               break;
             case '1':
-            this.scoreCells = this.scoreCells.concat([
-                [28, 2], [28, 5], [29, 1], [29, 2], [29, 3], [29, 4], [29, 5], [30, 5]
-              ])
+			  this.scoreCells = this.scoreCells.concat(this.shiftScore(20, NUM_ONE));
               break;
             case '2':
-            this.scoreCells = this.scoreCells.concat([
-                [28, 1], [28, 4], [28, 5], [29, 1], [29, 3], [29, 5], [30, 2], [30, 5]
-              ])
+              this.scoreCells = this.scoreCells.concat(this.shiftScore(20, NUM_TWO));
               break;
             case '3':
-            this.scoreCells = this.scoreCells.concat([
-                [28, 1], [28, 5], [29, 1], [29, 3], [29, 5], [30, 1], [30, 2], [30, 3], [30, 4], [30, 5]
-              ])
+              this.scoreCells = this.scoreCells.concat(this.shiftScore(20, NUM_THREE));
               break;
             case '4':
-            this.scoreCells = this.scoreCells.concat([
-                [28, 1], [28, 2], [28, 3], [29, 3], [30, 1], [30, 2], [30, 3], [30, 4], [30, 5]
-              ])
+              this.scoreCells = this.scoreCells.concat(this.shiftScore(20, NUM_FOUR));
               break;
             case '5':
-            this.scoreCells = this.scoreCells.concat([
-                [28, 1], [28, 2], [28, 3], [28, 5], [29, 1], [29, 3], [29, 5], [30, 1], [30, 3], [30, 4]
-              ])
+              this.scoreCells = this.scoreCells.concat(this.shiftScore(20, NUM_FIVE));
               break;
-
             case '6':
-            this.scoreCells = this.scoreCells.concat([
-                [28, 2], [28, 3], [28, 4], [28, 5], [29, 1], [29, 3], [29, 5], [30, 1], [30, 3], [30, 4], [30, 5]
-              ])
+              this.scoreCells = this.scoreCells.concat(this.shiftScore(20, NUM_SIX));
               break;
             case '7':
-            this.scoreCells = this.scoreCells.concat([
-                [28, 1], [28, 4], [28, 5], [29, 1], [29, 3], [30, 1], [30, 2]
-              ])
+              this.scoreCells = this.scoreCells.concat(this.shiftScore(20, NUM_SEVEN));
               break;
             case '8':
-            this.scoreCells = this.scoreCells.concat([
-                [28, 1], [28, 2], [28, 3], [28, 4], [28, 5], [29, 1], [29, 3], [29, 5], [30, 1], [30, 2], [30, 3], [30, 4], [30, 5]
-              ])
+              this.scoreCells = this.scoreCells.concat(this.shiftScore(20, NUM_EIGHT));
               break;
             case '9':
-            this.scoreCells = this.scoreCells.concat([
-                [28, 1], [28, 2], [28, 3], [28, 5], [29, 1], [29, 3], [29, 5], [30, 1], [30, 2], [30, 3], [30, 4]
-              ])
+              this.scoreCells = this.scoreCells.concat(this.shiftScore(20, NUM_NINE));
           }
         }
       }
