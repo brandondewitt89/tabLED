@@ -11,6 +11,17 @@ const BOARD_COLOR = 0x3C2F2F;
 const APPLE_COLOR = 0XC55452;
 const SCORE_COLOR = 0x9B6862;
 
+const NUM_ZERO = [ [1, 2], [1, 3], [1, 4], [2, 1], [2, 5], [3, 2], [3, 3], [3, 4] ];
+const NUM_ONE = [ [1, 2], [1, 5], [2, 1], [2, 2], [2, 3], [2, 4], [2, 5], [3, 5] ];
+const NUM_TWO = [ [1, 1], [1, 4], [1, 5], [2, 1], [2, 3], [2, 5], [3, 2], [3, 5] ];
+const NUM_THREE = [ [1, 1], [1, 5], [2, 1], [2, 3], [2, 5], [3, 1], [3, 2], [3, 3], [3, 4], [3, 5] ];
+const NUM_FOUR = [ [1, 1], [1, 2], [1, 3], [2, 3], [3, 1], [3, 2], [3, 3], [3, 4], [3, 5] ];
+const NUM_FIVE = [ [1, 1], [1, 2], [1, 3], [1, 5], [2, 1], [2, 3], [2, 5], [3, 1], [3, 3], [3, 4] ];
+const NUM_SIX = [ [1, 2], [1, 3], [1, 4], [1, 5], [2, 1], [2, 3], [2, 5], [3, 1], [3, 3], [3, 4], [3, 5] ];
+const NUM_SEVEN = [ [1, 1], [1, 4], [1, 5], [2, 1], [2, 3], [3, 1], [3, 2] ];
+const NUM_EIGHT = [ [1, 1], [1, 2], [1, 3], [1, 4], [1, 5], [2, 1], [2, 3], [2, 5], [3, 1], [3, 2], [3, 3], [3, 4], [3, 5] ];
+const NUM_NINE = [ [1, 1], [1, 2], [1, 3], [1, 5], [2, 1], [2, 3], [2, 5], [3, 1], [3, 2], [3, 3], [3, 4] ];
+
 const numPlayers = 1;
 const INIT_TABLE = [
   {
@@ -41,12 +52,6 @@ let apples;
 
 let snakes = [];
 
-// let scores = [];
-
-// var scoreCells = [];
-
-// var snakeLength = [];
-
 const pixelBuffer = new Uint32Array(BOARD_WIDTH * BOARD_HEIGHT);
 pixelBuffer.fill(0x00FFFF);
 
@@ -69,356 +74,6 @@ const removeCell = (list, cellToRemove) => {
     }
   }
 };
-
-// class Score {
-//
-//   constructor(color, score, player) {
-//
-//     this.color = color;
-//     this.score = score;
-//     this.player = player;
-//   }
-//
-//   // this.scoreCells = [];
-//
-//   convertScoreToCells(score, player) {
-//
-//     const scoreString = score.toString();
-//
-//     if (player === 0) {
-//       for (let i = 0; i < scoreString.length; i++) {
-//         if (i === 0) {
-//           switch (scoreString[0]) {
-//             case '0':
-//               scoreCells = [
-//                 [1, 2], [1, 3], [1, 4], [2, 1], [2, 5], [3, 2], [3, 3], [3, 4]
-//               ]
-//               break;
-//             case '1':
-//               scoreCells = [
-//                 [1, 2], [1, 5], [2, 1], [2, 2], [2, 3], [2, 4], [2, 5], [3, 5]
-//               ]
-//               break;
-//             case '2':
-//               scoreCells = [
-//                 [1, 1], [1, 4], [1, 5], [2, 1], [2, 3], [2, 5], [3, 2], [3, 5]
-//               ]
-//               break;
-//             case '3':
-//               scoreCells = [
-//                 [1, 1], [1, 5], [2, 1], [2, 3], [2, 5], [3, 1], [3, 2], [3, 3], [3, 4], [3, 5]
-//               ]
-//               break;
-//             case '4':
-//               scoreCells = [
-//                 [1, 1], [1, 2], [1, 3], [2, 3], [3, 1], [3, 2], [3, 3], [3, 4], [3, 5]
-//               ]
-//               break;
-//             case '5':
-//               scoreCells = [
-//                 [1, 1], [1, 2], [1, 3], [1, 5], [2, 1], [2, 3], [2, 5], [3, 1], [3, 3], [3, 4]
-//               ]
-//               break;
-//
-//             case '6':
-//               scoreCells = [
-//                 [1, 2], [1, 3], [1, 4], [1, 5], [2, 1], [2, 3], [2, 5], [3, 1], [3, 3], [3, 4], [3, 5]
-//               ]
-//               break;
-//             case '7':
-//               scoreCells = [
-//                 [1, 1], [1, 4], [1, 5], [2, 1], [2, 3], [3, 1], [3, 2]
-//               ]
-//               break;
-//             case '8':
-//               scoreCells = [
-//                 [1, 1], [1, 2], [1, 3], [1, 4], [1, 5], [2, 1], [2, 3], [2, 5], [3, 1], [3, 2], [3, 3], [3, 4], [3, 5]
-//               ]
-//               break;
-//             case '9':
-//               scoreCells = [
-//                 [1, 1], [1, 2], [1, 3], [1, 5], [2, 1], [2, 3], [2, 5], [3, 1], [3, 2], [3, 3], [3, 4]
-//               ]
-//           }
-//         }
-//         else if (i === 1) {
-//           switch (scoreString[1]) {
-//             case '0':
-//               scoreCells = scoreCells.concat([
-//                 [5, 2], [5, 3], [5, 4], [6, 1], [6, 5], [7, 2], [7, 3], [7, 4]
-//               ])
-//               break;
-//             case '1':
-//             scoreCells = scoreCells.concat([
-//                 [5, 2], [5, 5], [6, 1], [6, 2], [6, 3], [6, 4], [6, 5], [7, 5]
-//               ])
-//               break;
-//             case '2':
-//             scoreCells = scoreCells.concat([
-//                 [5, 1], [5, 4], [5, 5], [6, 1], [6, 3], [6, 5], [7, 2], [7, 5]
-//               ])
-//               break;
-//             case '3':
-//             scoreCells = scoreCells.concat([
-//                 [5, 1], [5, 5], [6, 1], [6, 3], [6, 5], [7, 1], [7, 2], [7, 3], [7, 4], [7, 5]
-//               ])
-//               break;
-//             case '4':
-//             scoreCells = scoreCells.concat([
-//                 [5, 1], [5, 2], [5, 3], [6, 3], [7, 1], [7, 2], [7, 3], [7, 4], [7, 5]
-//               ])
-//               break;
-//             case '5':
-//             scoreCells = scoreCells.concat([
-//                 [5, 1], [5, 2], [5, 3], [5, 5], [6, 1], [6, 3], [6, 5], [7, 1], [7, 3], [7, 4]
-//               ])
-//               break;
-//
-//             case '6':
-//             scoreCells = scoreCells.concat([
-//                 [5, 2], [5, 3], [5, 4], [5, 5], [6, 1], [6, 3], [6, 5], [7, 1], [7, 3], [7, 4], [7, 5]
-//               ])
-//               break;
-//             case '7':
-//             scoreCells = scoreCells.concat([
-//                 [5, 1], [5, 4], [5, 5], [6, 1], [6, 3], [7, 1], [7, 2]
-//               ])
-//               break;
-//             case '8':
-//             scoreCells = scoreCells.concat([
-//                 [5, 1], [5, 2], [5, 3], [5, 4], [5, 5], [6, 1], [6, 3], [6, 5], [7, 1], [7, 2], [7, 3], [7, 4], [7, 5]
-//               ])
-//               break;
-//             case '9':
-//             scoreCells = scoreCells.concat([
-//                 [5, 1], [5, 2], [5, 3], [5, 5], [6, 1], [6, 3], [6, 5], [7, 1], [7, 2], [7, 3], [7, 4]
-//               ])
-//           }
-//         }
-//         else if (i === 2) {
-//           switch (scoreString[2]) {
-//             case '0':
-//               scoreCells = scoreCells.concat([
-//                 [9, 2], [9, 3], [9, 4], [10, 1], [10, 5], [11, 2], [11, 3], [11, 4]
-//               ])
-//               break;
-//             case '1':
-//             scoreCells = scoreCells.concat([
-//                 [9, 2], [9, 5], [10, 1], [10, 2], [10, 3], [10, 4], [10, 5], [11, 5]
-//               ])
-//               break;
-//             case '2':
-//             scoreCells = scoreCells.concat([
-//                 [9, 1], [9, 4], [9, 5], [10, 1], [10, 3], [10, 5], [11, 2], [11, 5]
-//               ])
-//               break;
-//             case '3':
-//             scoreCells = scoreCells.concat([
-//                 [9, 1], [9, 5], [10, 1], [10, 3], [10, 5], [11, 1], [11, 2], [11, 3], [11, 4], [11, 5]
-//               ])
-//               break;
-//             case '4':
-//             scoreCells = scoreCells.concat([
-//                 [9, 1], [9, 2], [9, 3], [10, 3], [11, 1], [11, 2], [11, 3], [11, 4], [11, 5]
-//               ])
-//               break;
-//             case '5':
-//             scoreCells = scoreCells.concat([
-//                 [9, 1], [9, 2], [9, 3], [9, 5], [10, 1], [10, 3], [10, 5], [11, 1], [11, 3], [11, 4]
-//               ])
-//               break;
-//
-//             case '6':
-//             scoreCells = scoreCells.concat([
-//                 [9, 2], [9, 3], [9, 4], [9, 5], [10, 1], [10, 3], [10, 5], [11, 1], [11, 3], [11, 4], [11, 5]
-//               ])
-//               break;
-//             case '7':
-//             scoreCells = scoreCells.concat([
-//                 [9, 1], [9, 4], [9, 5], [10, 1], [10, 3], [11, 1], [11, 2]
-//               ])
-//               break;
-//             case '8':
-//             scoreCells = scoreCells.concat([
-//                 [9, 1], [9, 2], [9, 3], [9, 4], [9, 5], [10, 1], [10, 3], [10, 5], [11, 1], [11, 2], [11, 3], [11, 4], [11, 5]
-//               ])
-//               break;
-//             case '9':
-//             scoreCells = scoreCells.concat([
-//                 [9, 1], [9, 2], [9, 3], [9, 5], [10, 1], [10, 3], [10, 5], [11, 1], [11, 2], [11, 3], [11, 4]
-//               ])
-//           }
-//         }
-//       }
-//     }
-//     else if (player === 1) {
-//       for (let i = 0; i < scoreString.length; i++) {
-//         if (i === 0) {
-//           switch (scoreString[0]) {
-//             case '0':
-//               scoreCells = [
-//                 [20, 2], [20, 3], [20, 4], [21, 1], [21, 5], [22, 2], [22, 3], [22, 4]
-//               ]
-//               break;
-//             case '1':
-//               scoreCells = [
-//                 [20, 2], [20, 5], [21, 1], [21, 2], [21, 3], [21, 4], [21, 5], [22, 5]
-//               ]
-//               break;
-//             case '2':
-//               scoreCells = [
-//                 [20, 1], [20, 4], [20, 5], [21, 1], [21, 3], [21, 5], [22, 2], [22, 5]
-//               ]
-//               break;
-//             case '3':
-//               scoreCells = [
-//                 [20, 1], [20, 5], [21, 1], [21, 3], [21, 5], [22, 1], [22, 2], [22, 3], [22, 4], [22, 5]
-//               ]
-//               break;
-//             case '4':
-//               scoreCells = [
-//                 [20, 1], [20, 2], [20, 3], [21, 3], [22, 1], [22, 2], [22, 3], [22, 4], [22, 5]
-//               ]
-//               break;
-//             case '5':
-//               scoreCells = [
-//                 [20, 1], [20, 2], [20, 3], [20, 5], [21, 1], [21, 3], [21, 5], [22, 1], [22, 3], [22, 4]
-//               ]
-//               break;
-//
-//             case '6':
-//               scoreCells = [
-//                 [20, 2], [20, 3], [20, 4], [20, 5], [2, 1], [2, 3], [2, 5], [3, 1], [3, 3], [3, 4], [3, 5]
-//               ]
-//               break;
-//             case '7':
-//               scoreCells = [
-//                 [20, 1], [20, 4], [20, 5], [21, 1], [21, 3], [22, 1], [22, 2]
-//               ]
-//               break;
-//             case '8':
-//               scoreCells = [
-//                 [20, 1], [20, 2], [20, 3], [20, 4], [20, 5], [21, 1], [21, 3], [21, 5], [22, 1], [22, 2], [22, 3], [22, 4], [22, 5]
-//               ]
-//               break;
-//             case '9':
-//               scoreCells = [
-//                 [20, 1], [20, 2], [20, 3], [20, 5], [21, 1], [21, 3], [21, 5], [22, 1], [22, 2], [22, 3], [22, 4]
-//               ]
-//           }
-//         }
-//         else if (i === 1) {
-//           switch (scoreString[1]) {
-//             case '0':
-//               scoreCells = scoreCells.concat([
-//                 [24, 2], [24, 3], [24, 4], [25, 1], [25, 5], [26, 2], [26, 3], [26, 4]
-//               ])
-//               break;
-//             case '1':
-//             scoreCells = scoreCells.concat([
-//                 [24, 2], [24, 5], [25, 1], [25, 2], [25, 3], [25, 4], [25, 5], [26, 5]
-//               ])
-//               break;
-//             case '2':
-//             scoreCells = scoreCells.concat([
-//                 [24, 1], [24, 4], [24, 5], [25, 1], [25, 3], [25, 5], [26, 2], [26, 5]
-//               ])
-//               break;
-//             case '3':
-//             scoreCells = scoreCells.concat([
-//                 [24, 1], [24, 5], [25, 1], [25, 3], [25, 5], [26, 1], [26, 2], [26, 3], [26, 4], [26, 5]
-//               ])
-//               break;
-//             case '4':
-//             scoreCells = scoreCells.concat([
-//                 [24, 1], [24, 2], [24, 3], [25, 3], [26, 1], [26, 2], [26, 3], [26, 4], [26, 5]
-//               ])
-//               break;
-//             case '5':
-//             scoreCells = scoreCells.concat([
-//                 [24, 1], [24, 2], [24, 3], [24, 5], [25, 1], [25, 3], [25, 5], [26, 1], [26, 3], [26, 4]
-//               ])
-//               break;
-//
-//             case '6':
-//             scoreCells = scoreCells.concat([
-//                 [24, 2], [24, 3], [24, 4], [24, 5], [25, 1], [25, 3], [25, 5], [26, 1], [26, 3], [26, 4], [26, 5]
-//               ])
-//               break;
-//             case '7':
-//             scoreCells = scoreCells.concat([
-//                 [24, 1], [24, 4], [24, 5], [25, 1], [25, 3], [26, 1], [26, 2]
-//               ])
-//               break;
-//             case '8':
-//             scoreCells = scoreCells.concat([
-//                 [24, 1], [24, 2], [24, 3], [24, 4], [24, 5], [25, 1], [25, 3], [25, 5], [26, 1], [26, 2], [26, 3], [26, 4], [26, 5]
-//               ])
-//               break;
-//             case '9':
-//             scoreCells = scoreCells.concat([
-//                 [24, 1], [24, 2], [24, 3], [24, 5], [25, 1], [25, 3], [25, 5], [26, 1], [26, 2], [26, 3], [26, 4]
-//               ])
-//           }
-//         }
-//         else if (i === 2) {
-//           switch (scoreString[2]) {
-//             case '0':
-//               scoreCells = scoreCells.concat([
-//                 [28, 2], [28, 3], [28, 4], [29, 1], [29, 5], [30, 2], [30, 3], [30, 4]
-//               ])
-//               break;
-//             case '1':
-//             scoreCells = scoreCells.concat([
-//                 [28, 2], [28, 5], [29, 1], [29, 2], [29, 3], [29, 4], [29, 5], [30, 5]
-//               ])
-//               break;
-//             case '2':
-//             scoreCells = scoreCells.concat([
-//                 [28, 1], [28, 4], [28, 5], [29, 1], [29, 3], [29, 5], [30, 2], [30, 5]
-//               ])
-//               break;
-//             case '3':
-//             scoreCells = scoreCells.concat([
-//                 [28, 1], [28, 5], [29, 1], [29, 3], [29, 5], [30, 1], [30, 2], [30, 3], [30, 4], [30, 5]
-//               ])
-//               break;
-//             case '4':
-//             scoreCells = scoreCells.concat([
-//                 [28, 1], [28, 2], [28, 3], [29, 3], [30, 1], [30, 2], [30, 3], [30, 4], [30, 5]
-//               ])
-//               break;
-//             case '5':
-//             scoreCells = scoreCells.concat([
-//                 [28, 1], [28, 2], [28, 3], [28, 5], [29, 1], [29, 3], [29, 5], [30, 1], [30, 3], [30, 4]
-//               ])
-//               break;
-//
-//             case '6':
-//             scoreCells = scoreCells.concat([
-//                 [28, 2], [28, 3], [28, 4], [28, 5], [29, 1], [29, 3], [29, 5], [30, 1], [30, 3], [30, 4], [30, 5]
-//               ])
-//               break;
-//             case '7':
-//             scoreCells = scoreCells.concat([
-//                 [28, 1], [28, 4], [28, 5], [29, 1], [29, 3], [30, 1], [30, 2]
-//               ])
-//               break;
-//             case '8':
-//             scoreCells = scoreCells.concat([
-//                 [28, 1], [28, 2], [28, 3], [28, 4], [28, 5], [29, 1], [29, 3], [29, 5], [30, 1], [30, 2], [30, 3], [30, 4], [30, 5]
-//               ])
-//               break;
-//             case '9':
-//             scoreCells = scoreCells.concat([
-//                 [28, 1], [28, 2], [28, 3], [28, 5], [29, 1], [29, 3], [29, 5], [30, 1], [30, 2], [30, 3], [30, 4]
-//               ])
-//           }
-//         }
-//       }
-//     }
-//   };
-// }
 
 class Snake {
 
@@ -546,56 +201,44 @@ class Snake {
       for (let i = 0; i < scoreString.length; i++) {
         if (i === 0) {
           switch (scoreString[0]) {
-            case '0':
-              this.scoreCells = [
-                [1, 2], [1, 3], [1, 4], [2, 1], [2, 5], [3, 2], [3, 3], [3, 4]
-              ]
+			case '0':
+              this.scoreCells = NUM_ZERO;
               break;
+			  
             case '1':
-              this.scoreCells = [
-                [1, 2], [1, 5], [2, 1], [2, 2], [2, 3], [2, 4], [2, 5], [3, 5]
-              ]
+              this.scoreCells = NUM_ONE;
               break;
+			  
             case '2':
-              this.scoreCells = [
-                [1, 1], [1, 4], [1, 5], [2, 1], [2, 3], [2, 5], [3, 2], [3, 5]
-              ]
+              this.scoreCells = NUM_TWO;
               break;
+			  
             case '3':
-              this.scoreCells = [
-                [1, 1], [1, 5], [2, 1], [2, 3], [2, 5], [3, 1], [3, 2], [3, 3], [3, 4], [3, 5]
-              ]
+              this.scoreCells = NUM_THREE;
               break;
+			  
             case '4':
-              this.scoreCells = [
-                [1, 1], [1, 2], [1, 3], [2, 3], [3, 1], [3, 2], [3, 3], [3, 4], [3, 5]
-              ]
+              this.scoreCells = NUM_FOUR;
               break;
+			  
             case '5':
-              this.scoreCells = [
-                [1, 1], [1, 2], [1, 3], [1, 5], [2, 1], [2, 3], [2, 5], [3, 1], [3, 3], [3, 4]
-              ]
+              this.scoreCells = NUM_FIVE;
               break;
-
+			  
             case '6':
-              this.scoreCells = [
-                [1, 2], [1, 3], [1, 4], [1, 5], [2, 1], [2, 3], [2, 5], [3, 1], [3, 3], [3, 4], [3, 5]
-              ]
+              this.scoreCells = NUM_SIX;
               break;
+			  
             case '7':
-              this.scoreCells = [
-                [1, 1], [1, 4], [1, 5], [2, 1], [2, 3], [3, 1], [3, 2]
-              ]
+              this.scoreCells = NUM_SEVEN;
               break;
+			  
             case '8':
-              this.scoreCells = [
-                [1, 1], [1, 2], [1, 3], [1, 4], [1, 5], [2, 1], [2, 3], [2, 5], [3, 1], [3, 2], [3, 3], [3, 4], [3, 5]
-              ]
+              this.scoreCells = NUM_EIGHT;
               break;
+			  
             case '9':
-              this.scoreCells = [
-                [1, 1], [1, 2], [1, 3], [1, 5], [2, 1], [2, 3], [2, 5], [3, 1], [3, 2], [3, 3], [3, 4]
-              ]
+              this.scoreCells = NUM_NINE;
           }
         }
         else if (i === 1) {
@@ -606,9 +249,10 @@ class Snake {
               ])
               break;
             case '1':
-            this.scoreCells = this.scoreCells.concat([
-                [5, 2], [5, 5], [6, 1], [6, 2], [6, 3], [6, 4], [6, 5], [7, 5]
-              ])
+			  this.scoreCells = this.scoreCells.concat(this.shiftScore(4, NUM_ONE))
+            // this.scoreCells = this.scoreCells.concat([
+                // [5, 2], [5, 5], [6, 1], [6, 2], [6, 3], [6, 4], [6, 5], [7, 5]
+              // ])
               break;
             case '2':
             this.scoreCells = this.scoreCells.concat([
@@ -875,7 +519,65 @@ class Snake {
       }
     }
   };
-
+  
+  shiftScore(shiftBy, number) {
+	let shiftedNumber = [];
+	for (let [i, j] of number) {
+		i += shiftBy;
+		shiftedNumber = shiftedNumber.concat([i, j])
+	}
+	return shiftedNumber;
+  }
+  // shiftScore(player, digit, number) {
+	  // switch (player) {
+		// case 0:
+		  // switch (digit) {
+			// case 0:
+			  // return number;
+			  // break;
+			
+			// case 1:
+			  // for (let [i, j] of number) {
+				  // i += 4;
+			  // }
+			  // return number;
+			  // break;
+			
+			// case 2:
+			  // for (let [i, j] of number) {
+				  // i += 8;
+			  // }
+			  // return number;
+			  // break;
+		  // }
+		  // break;
+		
+		// case 1:
+		  // switch (digit) {
+			// case 0:
+			  // for (let [i, j] of number) {
+				  // i += 19;
+			  // }
+			  // return number;
+			  // break;
+			
+			// case 1:
+			  // for (let [i, j] of number) {
+				  // i += 23;
+			  // }
+			  // return number;
+			  // break;
+			
+			// case 2:
+			  // for (let [i, j] of number) {
+				  // i += 27;
+			  // }
+			  // return number;
+			  // break;
+		  // }
+		  // break;
+	  // }
+  // }
 }
 
 window.addEventListener("gamepadconnected", function(e) {
@@ -924,8 +626,6 @@ const init = () => {
 
   snakes = [];
 
-  // scores = [];
-
   for (let i = 0; i < numPlayers; i++) {
     snakes.push(new Snake(
       INIT_TABLE[i].bodyColor,
@@ -934,11 +634,6 @@ const init = () => {
       INIT_TABLE[i].direction,
       INIT_TABLE[i].player
     ));
-    // scores.push(new Score(
-    //   INIT_TABLE[i].scoreColor,
-    //   INIT_TABLE[i].score,
-    //   INIT_TABLE[i].player
-    // ));
   }
 
   apples = [];
@@ -998,180 +693,6 @@ const checkEatApples = () => {
   }
 };
 
-// const convertScoreToCells = () => {
-//   for (let snake of snakes) {
-//     const head = snake.getHead();
-//     const score = snake._cells.length;
-//     const scoreString = score.toString();
-//     // console.log(scoreString);
-//
-//     for (let i = 0; i < scoreString.length; i++) {
-//       if (i === 0) {
-//         switch (scoreString[0]) {
-//           case '0':
-//             scoreCells = [
-//               [1, 2], [1, 3], [1, 4], [2, 1], [2, 5], [3, 2], [3, 3], [3, 4]
-//             ]
-//             break;
-//           case '1':
-//             scoreCells = [
-//               [1, 2], [1, 5], [2, 1], [2, 2], [2, 3], [2, 4], [2, 5], [3, 5]
-//             ]
-//             break;
-//           case '2':
-//             scoreCells = [
-//               [1, 1], [1, 4], [1, 5], [2, 1], [2, 3], [2, 5], [3, 2], [3, 5]
-//             ]
-//             break;
-//           case '3':
-//             scoreCells = [
-//               [1, 1], [1, 5], [2, 1], [2, 3], [2, 5], [3, 1], [3, 2], [3, 3], [3, 4], [3, 5]
-//             ]
-//             break;
-//           case '4':
-//             scoreCells = [
-//               [1, 1], [1, 2], [1, 3], [2, 3], [3, 1], [3, 2], [3, 3], [3, 4], [3, 5]
-//             ]
-//             break;
-//           case '5':
-//             scoreCells = [
-//               [1, 1], [1, 2], [1, 3], [1, 5], [2, 1], [2, 3], [2, 5], [3, 1], [3, 3], [3, 4]
-//             ]
-//             break;
-//
-//           case '6':
-//             scoreCells = [
-//               [1, 2], [1, 3], [1, 4], [1, 5], [2, 1], [2, 3], [2, 5], [3, 1], [3, 3], [3, 4], [3, 5]
-//             ]
-//             break;
-//           case '7':
-//             scoreCells = [
-//               [1, 1], [1, 4], [1, 5], [2, 1], [2, 3], [3, 1], [3, 2]
-//             ]
-//             break;
-//           case '8':
-//             scoreCells = [
-//               [1, 1], [1, 2], [1, 3], [1, 4], [1, 5], [2, 1], [2, 3], [2, 5], [3, 1], [3, 2], [3, 3], [3, 4], [3, 5]
-//             ]
-//             break;
-//           case '9':
-//             scoreCells = [
-//               [1, 1], [1, 2], [1, 3], [1, 5], [2, 1], [2, 3], [2, 5], [3, 1], [3, 2], [3, 3], [3, 4]
-//             ]
-//         }
-//       }
-//       else if (i === 1) {
-//         switch (scoreString[1]) {
-//           case '0':
-//             scoreCells = scoreCells.concat([
-//               [5, 2], [5, 3], [5, 4], [6, 1], [6, 5], [7, 2], [7, 3], [7, 4]
-//             ])
-//             break;
-//           case '1':
-//           scoreCells = scoreCells.concat([
-//               [5, 2], [5, 5], [6, 1], [6, 2], [6, 3], [6, 4], [6, 5], [7, 5]
-//             ])
-//             break;
-//           case '2':
-//           scoreCells = scoreCells.concat([
-//               [5, 1], [5, 4], [5, 5], [6, 1], [6, 3], [6, 5], [7, 2], [7, 5]
-//             ])
-//             break;
-//           case '3':
-//           scoreCells = scoreCells.concat([
-//               [5, 1], [5, 5], [6, 1], [6, 3], [6, 5], [7, 1], [7, 2], [7, 3], [7, 4], [7, 5]
-//             ])
-//             break;
-//           case '4':
-//           scoreCells = scoreCells.concat([
-//               [5, 1], [5, 2], [5, 3], [6, 3], [7, 1], [7, 2], [7, 3], [7, 4], [7, 5]
-//             ])
-//             break;
-//           case '5':
-//           scoreCells = scoreCells.concat([
-//               [5, 1], [5, 2], [5, 3], [5, 5], [6, 1], [6, 3], [6, 5], [7, 1], [7, 3], [7, 4]
-//             ])
-//             break;
-//
-//           case '6':
-//           scoreCells = scoreCells.concat([
-//               [5, 2], [5, 3], [5, 4], [5, 5], [6, 1], [6, 3], [6, 5], [7, 1], [7, 3], [7, 4], [7, 5]
-//             ])
-//             break;
-//           case '7':
-//           scoreCells = scoreCells.concat([
-//               [5, 1], [5, 4], [5, 5], [6, 1], [6, 3], [7, 1], [7, 2]
-//             ])
-//             break;
-//           case '8':
-//           scoreCells = scoreCells.concat([
-//               [5, 1], [5, 2], [5, 3], [5, 4], [5, 5], [6, 1], [6, 3], [6, 5], [7, 1], [7, 2], [7, 3], [7, 4], [7, 5]
-//             ])
-//             break;
-//           case '9':
-//           scoreCells = scoreCells.concat([
-//               [5, 1], [5, 2], [5, 3], [5, 5], [6, 1], [6, 3], [6, 5], [7, 1], [7, 2], [7, 3], [7, 4]
-//             ])
-//         }
-//       }
-//       else if (i === 2) {
-//         switch (scoreString[2]) {
-//           case '0':
-//             scoreCells = scoreCells.concat([
-//               [9, 2], [9, 3], [9, 4], [10, 1], [10, 5], [11, 2], [11, 3], [11, 4]
-//             ])
-//             break;
-//           case '1':
-//           scoreCells = scoreCells.concat([
-//               [9, 2], [9, 5], [10, 1], [10, 2], [10, 3], [10, 4], [10, 5], [11, 5]
-//             ])
-//             break;
-//           case '2':
-//           scoreCells = scoreCells.concat([
-//               [9, 1], [9, 4], [9, 5], [10, 1], [10, 3], [10, 5], [11, 2], [11, 5]
-//             ])
-//             break;
-//           case '3':
-//           scoreCells = scoreCells.concat([
-//               [9, 1], [9, 5], [10, 1], [10, 3], [10, 5], [11, 1], [11, 2], [11, 3], [11, 4], [11, 5]
-//             ])
-//             break;
-//           case '4':
-//           scoreCells = scoreCells.concat([
-//               [9, 1], [9, 2], [9, 3], [10, 3], [11, 1], [11, 2], [11, 3], [11, 4], [11, 5]
-//             ])
-//             break;
-//           case '5':
-//           scoreCells = scoreCells.concat([
-//               [9, 1], [9, 2], [9, 3], [9, 5], [10, 1], [10, 3], [10, 5], [11, 1], [11, 3], [11, 4]
-//             ])
-//             break;
-//
-//           case '6':
-//           scoreCells = scoreCells.concat([
-//               [9, 2], [9, 3], [9, 4], [9, 5], [10, 1], [10, 3], [10, 5], [11, 1], [11, 3], [11, 4], [11, 5]
-//             ])
-//             break;
-//           case '7':
-//           scoreCells = scoreCells.concat([
-//               [9, 1], [9, 4], [9, 5], [10, 1], [10, 3], [11, 1], [11, 2]
-//             ])
-//             break;
-//           case '8':
-//           scoreCells = scoreCells.concat([
-//               [9, 1], [9, 2], [9, 3], [9, 4], [9, 5], [10, 1], [10, 3], [10, 5], [11, 1], [11, 2], [11, 3], [11, 4], [11, 5]
-//             ])
-//             break;
-//           case '9':
-//           scoreCells = scoreCells.concat([
-//               [9, 1], [9, 2], [9, 3], [9, 5], [10, 1], [10, 3], [10, 5], [11, 1], [11, 2], [11, 3], [11, 4]
-//             ])
-//         }
-//       }
-//     }
-//   }
-// };
-
 const createRandomApple = () => {
 
   while (true) {
@@ -1227,12 +748,6 @@ const render = () => {
 
   for (let j = 0; j < BOARD_HEIGHT; j++) {
     for (let i = 0; i < BOARD_WIDTH; i++) {
-
-      // for (let score of scores) {
-      //   if (containsCell(scoreCells, [i, j])) {
-      //     pixelBuffer[j*BOARD_WIDTH + i]  = score.color;
-      //   }
-      // }
 
       for (let snake of snakes) {
         if (containsCell(snake.scoreCells, [i, j])) {
