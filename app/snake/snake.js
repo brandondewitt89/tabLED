@@ -7,8 +7,8 @@ const APPLE_DELAY_MILLISECONDS = 3000;
 const SIMULATOR_DELAY_MILLISECONDS = 100;
 const GROW_LENGTH = 2;
 
-const BOARD_COLOR = 0x3C2F2F;
-const APPLE_COLOR = 0X7F9352;
+const COLOR_RED = 0X93527F;
+const COLOR_GREEN = 0X7F9352;
 
 const NUM_ZERO =  [ [0, 2], [0, 3], [0, 4], [1, 1], [1, 5], [2, 2], [2, 3], [2, 4] ];
 const NUM_ONE =   [ [0, 2], [0, 5], [1, 1], [1, 2], [1, 3], [1, 4], [1, 5], [2, 5] ];
@@ -20,6 +20,8 @@ const NUM_SIX =   [ [0, 2], [0, 3], [0, 4], [0, 5], [1, 1], [1, 3], [1, 5], [2, 
 const NUM_SEVEN = [ [0, 1], [0, 4], [0, 5], [1, 1], [1, 3], [2, 1], [2, 2] ];
 const NUM_EIGHT = [ [0, 1], [0, 2], [0, 3], [0, 4], [0, 5], [1, 1], [1, 3], [1, 5], [2, 1], [2, 2], [2, 3], [2, 4], [2, 5] ];
 const NUM_NINE =  [ [0, 1], [0, 2], [0, 3], [0, 5], [1, 1], [1, 3], [1, 5], [2, 1], [2, 2], [2, 3], [2, 4] ];
+
+const BOARD_COLOR = 0X3C2F2F;
 
 const numPlayers = 1;
 const INIT_TABLE = [
@@ -47,8 +49,12 @@ const browserDisplay  = new BrowserDisplay(
 const display = new TableDisplay(
   BOARD_WIDTH, BOARD_HEIGHT);
 
+  
+var appleColor = COLOR_RED;
+var isPaused = true;
+  
+  
 let apples;
-
 let snakes = [];
 
 const pixelBuffer = new Uint32Array(BOARD_WIDTH * BOARD_HEIGHT);
@@ -446,8 +452,19 @@ document.addEventListener('keydown', (event) => {
     case 's':
       snakes[1].setNextMove('down');
       break;
+	case 'p':
+	  isPaused = !isPaused;
+	  break;
   }
 });
+
+document.getElementById("btnGreen").onclick = function() {changeAppleColor(COLOR_GREEN)};
+document.getElementById("btnRed").onclick = function() {changeAppleColor(COLOR_RED)};
+
+function changeAppleColor(colorIn) {
+    appleColor = colorIn;
+	// alert ("Color Change!");
+}
 
 // from MDN: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
 const randInRange = (min, max) => {
@@ -482,7 +499,8 @@ const checkCollisions = () => {
   for (let snake of snakes) {
     const head = snake.getHead();
     const cells = snake.getCells();
-
+	
+	// check for collisions with wall
     if (head[0] < 0 || head[0] >= BOARD_WIDTH ||
         head[1] < 0 || head[1] >= BOARD_HEIGHT) {
       return true;
@@ -497,7 +515,7 @@ const checkCollisions = () => {
       }
     }
 
-    // check collisions with other players
+    // check for collisions with other players
     for (let other of snakes) {
       if (other !== snake) {
 
@@ -528,28 +546,29 @@ const checkEatApples = () => {
 };
 
 const createRandomApple = () => {
+  if (!isPaused) {
+	  while (true) {
 
-  while (true) {
+		const randX = randInRange(0, BOARD_WIDTH);
+		const randY = randInRange(0, BOARD_HEIGHT);
 
-    const randX = randInRange(0, BOARD_WIDTH);
-    const randY = randInRange(0, BOARD_HEIGHT);
+		const cell = [randX, randY];
 
-    const cell = [randX, randY];
+		let touchesNoSnakes = true;
 
-    let touchesNoSnakes = true;
+		for (let snake of snakes) {
 
-    for (let snake of snakes) {
+		  if (snake.coversCell(cell)) {
+			touchesNoSnakes = false;
+			break;
+		  }
+		}
 
-      if (snake.coversCell(cell)) {
-        touchesNoSnakes = false;
-        break;
-      }
-    }
-
-    if (touchesNoSnakes && !containsCell(apples, cell)) {
-      apples.push(cell);
-      break;
-    }
+		if (touchesNoSnakes && !containsCell(apples, cell)) {
+		  apples.push(cell);
+		  break;
+		}
+	  }
   }
 };
 
@@ -558,15 +577,17 @@ const simulate = () => {
   for (let snake of snakes) {
 
     //snake.move(snake.direction);
+	
+	if (!isPaused) {
+		snake.updatePosition();
 
-    snake.updatePosition();
+		if (checkCollisions()) {
+		  init();
+		}
+		checkEatApples();
 
-    if (checkCollisions()) {
-      init();
-    }
-    checkEatApples();
-
-    snake.convertScoreToCells(snake.player);
+		snake.convertScoreToCells(snake.player);
+	}
   }
 
   render();
@@ -587,7 +608,7 @@ const render = () => {
           pixelBuffer[j*BOARD_WIDTH + i]  = snake.bodyColor;
         }
         else if (containsCell(apples, [i, j])) {
-          pixelBuffer[j*BOARD_WIDTH + i]  = APPLE_COLOR;
+          pixelBuffer[j*BOARD_WIDTH + i]  = appleColor;
         }
       }
     }
