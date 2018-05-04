@@ -21,6 +21,7 @@ const NUM_SEVEN = [ [0, 1], [0, 4], [0, 5], [1, 1], [1, 3], [2, 1], [2, 2] ];
 const NUM_EIGHT = [ [0, 1], [0, 2], [0, 3], [0, 4], [0, 5], [1, 1], [1, 3], [1, 5], [2, 1], [2, 2], [2, 3], [2, 4], [2, 5] ];
 const NUM_NINE =  [ [0, 1], [0, 2], [0, 3], [0, 5], [1, 1], [1, 3], [1, 5], [2, 1], [2, 2], [2, 3], [2, 4] ];
 
+
 const BOARD_COLOR = 0X3C2F2F;
 
 const numPlayers = 1;
@@ -49,11 +50,11 @@ const browserDisplay  = new BrowserDisplay(
 const display = new TableDisplay(
   BOARD_WIDTH, BOARD_HEIGHT);
 
-  
+
 var appleColor = COLOR_RED;
 var isPaused = true;
-  
-  
+
+
 let apples;
 let snakes = [];
 
@@ -409,7 +410,7 @@ class Snake {
       }
     }
   };
-  
+
   shiftScore(shiftBy, number) {
 	let shiftedNumber = [];
 	for (let [i, j] of number) {
@@ -452,8 +453,8 @@ document.addEventListener('keydown', (event) => {
     case 's':
       snakes[1].setNextMove('down');
       break;
-	case 'p':
-	  isPaused = !isPaused;
+    case 'p':
+      isPaused = !isPaused;
 	  break;
   }
 });
@@ -499,7 +500,7 @@ const checkCollisions = () => {
   for (let snake of snakes) {
     const head = snake.getHead();
     const cells = snake.getCells();
-	
+
 	// check for collisions with wall
     if (head[0] < 0 || head[0] >= BOARD_WIDTH ||
         head[1] < 0 || head[1] >= BOARD_HEIGHT) {
@@ -577,7 +578,7 @@ const simulate = () => {
   for (let snake of snakes) {
 
     //snake.move(snake.direction);
-	
+
 	if (!isPaused) {
 		snake.updatePosition();
 
