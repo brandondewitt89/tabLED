@@ -6,11 +6,18 @@
     <meta charset="utf-8">
 
     <link rel="stylesheet" media="screen" href="https://fontlibrary.org/face/segment7" type="text/css"/>
-
     <!-- <link rel="stylesheet" media="screen" href="https://fontlibrary.org/face/process" type="text/css"/> -->
 
-    
-    <link href="/Users/brandondewitt/Downloads/tabLED-master/styles/style.css" rel="stylesheet" type="text/css">
+    <!-- palette picker CSS -->
+    <link rel="stylesheet" href="css/bootstrap-3.0.0.min.css">
+    <link rel="stylesheet" href="css/pick-a-color-1.2.3.min.css">
+
+    <!-- for IE and mobile support -->
+    <meta http-equiv="x-ua-compatible" content="IE=10">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <link href="/Users/brandondewitt/Downloads/tabLED-master/app/css/style.css" rel="stylesheet" type="text/css">
     <!-- <link href="C:\Users\brandon.dewitt\Downloads\tabLED-master\styles\style.css" rel="stylesheet" type="text/css"> -->
 
     <style>
@@ -26,18 +33,32 @@
   <body>
 
     <h1> TabLED Tester </h1>
-	<h2>
-	  <button id="btnGreen">Green</button>
-	  <button id="btnRed">Red</button>
-	</h2>
+  	<h2>
+  	  <!-- <button id="btnGreen">Green</button>
+  	  <button id="btnRed">Red</button> -->
+
+      <button id="btnFillRed">Fill Red</button>
+      <button id="btnFillGreen">Fill Green</button>
+      <button id="btnFillBlue">Fill Blue</button>
+      <button id="btnFillPicker">Fill Picker</button>
+
+  	</h2>
+    <h3>
+      <!-- palette picker js -->
+      <script src="dependencies/jquery-1.9.1.min.js"></script>
+    	<script src="dependencies/tinycolor-0.9.15.min.js"></script>
+    	<script src="dependencies/pick-a-color-1.2.3.min.js"></script>
+      <input type="text" value="YOUR-DEFAULT" name="YOUR-NAME" class="pick-a-color form-control">
+    </h3>
+
     <div id='board'></div>
     <script src="tabLED.js"></script>
     <script src="display/browser.js"></script>
     <script src="display/table.js"></script>
-    <!--
-    <script src="pong/pong.js"></script>
-    -->
-    <script src="snake/snake.js"></script>
+
+    <!-- <script src="pong/pong.js"></script> -->
+    <!-- <script src="snake/snake.js"></script> -->
+    <script src="paint/paint.js"></script>
   </body>
 
 </html>
