@@ -6,13 +6,13 @@ const CELL_HEIGHT = CELL_WIDTH;
 const RENDER_DELAY_MILLISECONDS = 100;
 
 
-const COLOR_RED = 0XFF0000;
+const COLOR_RED   = 0XFF0000;
 const COLOR_GREEN = 0X00FF00;
-const COLOR_BLUE = 0X0000FF;
+const COLOR_BLUE  = 0X0000FF;
 
 // initial conditions
 let fillColor = 0X3C2F2F;
-let paintColor = 0XFFFFFF;
+let paintColor = 0X3C2F2F;
 
 
 const board = document.querySelector('#board');
@@ -31,7 +31,7 @@ pixelBuffer.fill(0x00FFFF);
 document.getElementById("btnFillRed").onclick = function() {changeFillColor(COLOR_RED)};
 document.getElementById("btnFillGreen").onclick = function() {changeFillColor(COLOR_GREEN)};
 document.getElementById("btnFillBlue").onclick = function() {changeFillColor(COLOR_BLUE)};
-document.getElementById("btnFillPicker").onclick = fillColor;
+document.getElementById("btnFillPicker").onclick = function() {changeFillColor(paintColor)};
 
 function changeFillColor(colorIn) {
     fillColor = colorIn;
@@ -79,7 +79,7 @@ $(document).ready(function () {
 
   $(".pick-a-color").on("change", function () {
     console.log($(this).val());
-    fillColor = parseInt("0X" + ($(this).val()));
+    paintColor = parseInt("0X" + ($(this).val()));
   });
 });
 
