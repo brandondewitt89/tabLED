@@ -16,7 +16,7 @@ let fillColor = 0X3C2F2F;
 let paintColor = 0X3C2F2F;
 let testColor = 0X0000FF;
 
-let paintCells = [0, 0];
+let paintCells = [];
 
 
 const board = document.querySelector('#board');
@@ -30,6 +30,17 @@ const display = new TableDisplay(
 // initialize board pixels
 const pixelBuffer = new Uint32Array(BOARD_WIDTH * BOARD_HEIGHT);
 pixelBuffer.fill(0x00FFFF);
+
+class BoardPixel {
+  constructor(color) {
+
+    this.color = color;
+  }
+
+  setColor(color) {
+
+  }
+}
 
 
 document.getElementById("btnFillRed").onclick = function() {changeFillColor(COLOR_RED)};
@@ -81,7 +92,7 @@ function printMousePos(event) {
 	let relY = event.offsetY;
 	let PixelX = Math.trunc(relX / 20);
 	let PixelY = Math.trunc(relY / 20);
-	
+
 	const paintCell = [PixelX, PixelY]
 	paintCells.push(paintCell);
 
