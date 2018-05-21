@@ -63,27 +63,32 @@ function saveImage(temp) {
       image[i][j] = temp[i][j].getColor();
     }
   }
-  localStorage.setItem("image", JSON.stringify(image));
+  var imageName = prompt("Please enter the image name", "Temp");
+    if (imageName != null) {
+		localStorage.setItem(imageName, JSON.stringify(image));
+    }
+  
   // console.log('pixels: ' + pixels);
   // console.log('image: ' + image);
-  for (var j = 0; j < BOARD_HEIGHT; j++) {
-    for (var i = 0; i < BOARD_WIDTH; i++) {
+  // for (var j = 0; j < BOARD_HEIGHT; j++) {
+    // for (var i = 0; i < BOARD_WIDTH; i++) {
       // console.log('pixels' + '[' + i + ']' + '[' + j + ']: ' + pixels[i][j].getColor());
       // console.log('temp' + '[' + i + ']' + '[' + j + ']: ' + temp[i][j].getColor());
-      console.log('image' + '[' + i + ']' + '[' + j + ']: ' + image[i][j]);
-    }
-  }
+      // console.log('image' + '[' + i + ']' + '[' + j + ']: ' + image[i][j]);
+    // }
+  // }
 }
 
 function loadImage() {
-  var loadedImage = JSON.parse(localStorage.getItem("image"));
+  var imageName = prompt("Please enter the image name", "Temp");
+  var loadedImage = JSON.parse(localStorage.getItem(imageName));
   // pixels = loadedImage;
   // console.log('loaded image: ' + loadedImage);
   // console.log('pixels: ' + pixels);
   for (var j = 0; j < BOARD_HEIGHT; j++) {
     for (var i = 0; i < BOARD_WIDTH; i++) {
       pixels[i][j] = new Pixel(loadedImage[i][j]);
-      console.log('pixels' + '[' + i + ']' + '[' + j + ']: ' + pixels[i][j]);
+      // console.log('pixels' + '[' + i + ']' + '[' + j + ']: ' + pixels[i][j]);
       // console.log('loadedImage' + '[' + i + ']' + '[' + j + ']: ' + loadedImage[i][j]);
     }
   }
@@ -163,7 +168,7 @@ $(document).ready(function () {
   });
 
   $(".pick-a-color").on("change", function () {
-    console.log($(this).val());
+    // console.log($(this).val());
     color = parseInt("0X" + ($(this).val()));
     changePaintColor(color);
   });
