@@ -5,19 +5,29 @@ const CELL_WIDTH = '20px';
 const CELL_HEIGHT = CELL_WIDTH;
 const RENDER_DELAY_MILLISECONDS = 100;
 
-
+const COLOR_BLACK = 0X000000;
+const COLOR_WHITE = 0XFFFFFF;
 const COLOR_RED   = 0XFF0000;
 const COLOR_GREEN = 0X00FF00;
 const COLOR_BLUE  = 0X0000FF;
-const COLOR_BLACK = 0X000000;
 
 // initial conditions
 let fillColor = 0X3C2F2F;
 let paintColor = 0X3C2F2F;
-let testColor = 0X0000FF;
 
-let paintCells = [];
+// let paintCells = [];
 
+var pixels = new Array(BOARD_WIDTH);
+for (var i = 0; i < pixels.length; i++) {
+  pixels[i] = new Array(BOARD_HEIGHT);
+}
+
+
+for (var j = 0; j < BOARD_HEIGHT; j++) {
+  for (var i = 0; i < BOARD_WIDTH; i++) {
+    pixels[i][j] = new Pixel(COLOR_BLACK);
+  }
+}
 
 const board = document.querySelector('#board');
 
@@ -29,29 +39,75 @@ const display = new TableDisplay(
 
 // initialize board pixels
 const pixelBuffer = new Uint32Array(BOARD_WIDTH * BOARD_HEIGHT);
-pixelBuffer.fill(0x00FFFF);
+pixelBuffer.fill(COLOR_BLACK);
 
-class BoardPixel {
-  constructor(color) {
+// playing with local storage
+// var names = [];
+// names[0] = prompt("New member name?");
+// localStorage.setItem("names", JSON.stringify(names));
+//
+// var storedNames = JSON.parse(localStorage.getItem("names"));
 
-    this.color = color;
+document.getElementById("btnSaveImage").onclick = function() {saveImage(pixels)};
+document.getElementById("btnLoadImage").onclick = function() {loadImage()};
+document.getElementById("btnFillPicker").onclick = function() {changeFillColor(color)};
+document.getElementById("btnClear").onclick = function() {changeFillColor(COLOR_BLACK)};
+
+function saveImage(temp) {
+  var image = new Array(BOARD_WIDTH);
+  for (var i = 0; i < image.length; i++) {
+    image[i] = new Array(BOARD_HEIGHT);
   }
-
-  setColor(color) {
-
+  for (var j = 0; j < BOARD_HEIGHT; j++) {
+    for (var i = 0; i < BOARD_WIDTH; i++) {
+      image[i][j] = temp[i][j].getColor();
+    }
+  }
+  localStorage.setItem("image", JSON.stringify(image));
+  // console.log('pixels: ' + pixels);
+  // console.log('image: ' + image);
+  for (var j = 0; j < BOARD_HEIGHT; j++) {
+    for (var i = 0; i < BOARD_WIDTH; i++) {
+      // console.log('pixels' + '[' + i + ']' + '[' + j + ']: ' + pixels[i][j].getColor());
+      // console.log('temp' + '[' + i + ']' + '[' + j + ']: ' + temp[i][j].getColor());
+      console.log('image' + '[' + i + ']' + '[' + j + ']: ' + image[i][j]);
+    }
   }
 }
 
+function loadImage() {
+  var loadedImage = JSON.parse(localStorage.getItem("image"));
+  // pixels = loadedImage;
+  // console.log('loaded image: ' + loadedImage);
+  // console.log('pixels: ' + pixels);
+  for (var j = 0; j < BOARD_HEIGHT; j++) {
+    for (var i = 0; i < BOARD_WIDTH; i++) {
+      pixels[i][j] = new Pixel(loadedImage[i][j]);
+      console.log('pixels' + '[' + i + ']' + '[' + j + ']: ' + pixels[i][j]);
+      // console.log('loadedImage' + '[' + i + ']' + '[' + j + ']: ' + loadedImage[i][j]);
+    }
+  }
+}
 
-document.getElementById("btnFillRed").onclick = function() {changeFillColor(COLOR_RED)};
-document.getElementById("btnFillGreen").onclick = function() {changeFillColor(COLOR_GREEN)};
-document.getElementById("btnFillBlue").onclick = function() {changeFillColor(COLOR_BLUE)};
-document.getElementById("btnFillPicker").onclick = function() {changeFillColor(paintColor)};
-document.getElementById("btnClear").onclick = function() {clearPaintCells(paintCells)};
-
-function changeFillColor(colorIn) {
-    fillColor = colorIn;
+function changePaintColor(color) {
+    paintColor = color;
+    // return fillColor;
 	// alert ("Color Change!");
+}
+
+function changeFillColor(color) {
+    fillColor = color;
+    for (var j = 0; j < BOARD_HEIGHT; j++) {
+      for (var i = 0; i < BOARD_WIDTH; i++) {
+        pixels[i][j].setColor(fillColor);
+      }
+    }
+}
+
+for (var j = 0; j < BOARD_HEIGHT; j++) {
+  for (var i = 0; i < BOARD_WIDTH; i++) {
+    pixelBuffer[j * BOARD_WIDTH + i] = pixels[i][j].getColor();
+  }
 }
 
 const containsCell = (list, cellToCheck) => {
@@ -67,19 +123,14 @@ const cellsEqual = (a, b) => {
   return a[0] === b[0] && a[1] === b[1];
 };
 
-function clearPaintCells(list) {
-  list.splice(0);
-}
+// function clearPaintCells(list) {
+//   list.splice(0);
+// }
 
 const render = () => {
-
-  pixelBuffer.fill(COLOR_BLACK);
-
-  for (let j = 0; j < BOARD_HEIGHT; j++) {
-    for (let i = 0; i < BOARD_WIDTH; i++) {
-		if (containsCell(paintCells, [i, j])) {
-          pixelBuffer[j*BOARD_WIDTH + i] = fillColor;
-        }
+  for (var j = 0; j < BOARD_HEIGHT; j++) {
+    for (var i = 0; i < BOARD_WIDTH; i++) {
+      pixelBuffer[j * BOARD_WIDTH + i] = pixels[i][j].getColor();
     }
   }
 
@@ -88,17 +139,12 @@ const render = () => {
 };
 
 function printMousePos(event) {
-	let relX = event.offsetX;
-	let relY = event.offsetY;
-	let PixelX = Math.trunc(relX / 20);
-	let PixelY = Math.trunc(relY / 20);
+	var relX = event.offsetX;
+	var relY = event.offsetY;
+	var PixelX = Math.trunc(relX / 20);
+	var PixelY = Math.trunc(relY / 20);
 
-	const paintCell = [PixelX, PixelY]
-	paintCells.push(paintCell);
-
-
-	// console.log("offsetX: " + relX + " - offsetY: " + relY);
-	// console.log("PixelX: " + PixelX + " - PixelY: " + PixelY);
+  pixels[PixelX][PixelY].setColor(paintColor);
 	}
 
 browserDisplay._canvas.addEventListener("click", printMousePos);
@@ -118,7 +164,8 @@ $(document).ready(function () {
 
   $(".pick-a-color").on("change", function () {
     console.log($(this).val());
-    paintColor = parseInt("0X" + ($(this).val()));
+    color = parseInt("0X" + ($(this).val()));
+    changePaintColor(color);
   });
 });
 
