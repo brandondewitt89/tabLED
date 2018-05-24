@@ -1,7 +1,6 @@
 html {
   background-color: #664C00;
   font-size: 10px;
-  font-family: 'Segment7Standard';
   font-weight: normal;
 }
 
@@ -9,7 +8,7 @@ html {
 h1 {
   margin: 0;
   padding: 20px 0;
-  color: #FFBF00;
+  color: #E0DBCC;
   font-size: 60px;
   font-family: 'Segment7Standard';
   font-weight: normal;
@@ -17,24 +16,106 @@ h1 {
   text-shadow: 3px 3px 1px black;
 }
 
-p, li {
+h2 {
+  margin: 0;
+  padding: 20px;
+  color: #332600;
+  font-size: 30px;
+}
+
+p {
   font-size: 16px;
   line-height: 2;
   letter-spacing: 1px;
 }
 
 body {
-  width: 740px;
-  margin-top: 50px;
-  margin-bottom: 50px;
+  width: 100%;
+  height: 100%;
+  margin-top: 0px;
+  margin-bottom: 20px;
   margin-right: auto;
   margin-left: auto;
-  background-color: #FFFFFF;
-  padding: 0 20px 20px 20px;
-  border: 5px solid black;
+  background-color: #A39366;
+  padding: 0px 0px 20px 0px;
+  border: 5px solid #332600;
 }
 
 img {
   display: block;
   margin: 0 auto;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #332600;
+}
+
+li {
+    float: left;
+    /* position: fixed; */
+}
+
+li a {
+    display: inline-block;
+    color: #E0DBCC;
+    font-size: 30px;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+li a:hover {
+    background-color: #513C00;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.btnStyleMode {
+  background-color: #846F32;
+  border: 2px solid #332600;
+  color: #332600;
+  width: auto;
+  height: auto;
+  margin: 5px;
+  padding: 15px 30px;
+  text-align: center;
+  text-decoration: none;
+  display: block;
+  font-size: 16px;
+}
+
+.disabled {
+  opacity: 0.6;
+  /* cursor: not-allowed; */
+}
+
+/* Create two unequal columns that floats next to each other */
+.column {
+  float: left;
+  /* margin: 20px; */
+  padding: 20px;
+  height: 500px; /* Should be removed. Only for demonstration */
+}
+
+.left {
+  width: 25%;
+  background-color: #C1B799;
+}
+
+.right {
+  width: 75%;
+  background-color: #E0DBCC;
+}
+
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
 }
