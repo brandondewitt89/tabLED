@@ -21,22 +21,18 @@ const NUM_SEVEN = [ [0, 1], [0, 4], [0, 5], [1, 1], [1, 3], [2, 1], [2, 2] ];
 const NUM_EIGHT = [ [0, 1], [0, 2], [0, 3], [0, 4], [0, 5], [1, 1], [1, 3], [1, 5], [2, 1], [2, 2], [2, 3], [2, 4], [2, 5] ];
 const NUM_NINE =  [ [0, 1], [0, 2], [0, 3], [0, 5], [1, 1], [1, 3], [1, 5], [2, 1], [2, 2], [2, 3], [2, 4] ];
 
-
-const BOARD_COLOR = 0X3C2F2F;
-
-const numPlayers = 1;
 const INIT_TABLE = [
   {
     startCell: [0, 2],
     direction: 'down',
-    bodyColor: 0x938552,
+    bodyColor: snake1Color,
     scoreColor: 0x655208,
     player: 0
   },
   {
     startCell: [BOARD_WIDTH - 1, 2],
     direction: 'down',
-    bodyColor: 0x936552,
+    bodyColor: snake2Color,
     scoreColor: 0x652408,
     player:1
   },
@@ -50,8 +46,13 @@ const browserDisplay  = new BrowserDisplay(
 const display = new TableDisplay(
   BOARD_WIDTH, BOARD_HEIGHT);
 
-
+let numPlayers = 0;
+var paintColor = 0X846F32;
+var boardColor = 0X3C2F2F;
+var snake1Color = 0x938552;
+var snake2Color = 0x936552;
 var appleColor = COLOR_RED;
+
 var isPaused = true;
 
 
@@ -459,15 +460,26 @@ document.addEventListener('keydown', (event) => {
   }
 });
 
-document.getElementById("btnHome").onclick = function() {toHome()};
-document.getElementById("btnPaint").onclick = function() {toPaint()};
 
-function toHome() {
-	window.open("file:///Users/brandondewitt/Downloads/tabLED-master/app/index.html","_self")
+document.getElementById("btnSnake1Color").onclick = function() {changeSnake1Color(paintColor)};
+document.getElementById("btnSnake2Color").onclick = function() {changeSnake2Color(paintColor)};
+document.getElementById("btnAppleColor").onclick = function() {changeAppleColor(paintColor)};
+
+// if (numPlayers === 2) {
+	
+// }
+
+function changePaintColor(color) {
+    paintColor = color;
+    // return fillColor;
 }
 
-function toPaint() {
-	window.open("file:///Users/brandondewitt/Downloads/tabLED-master/app/paint.html","_self")
+function changeSnake1Color(colorIn) {
+    snakes[0].bodyColor = colorIn;
+}
+
+function changeSnake2Color(colorIn) {
+    snakes[1].bodyColor = colorIn;
 }
 
 function changeAppleColor(colorIn) {
@@ -485,6 +497,12 @@ const randInRange = (min, max) => {
 const init = () => {
 
   snakes = [];
+  if (numPlayers === 0) {
+	  while (numPlayers != 1 && numPlayers != 2) {
+		  numPlayers = prompt("Please enter number of players (1 or 2)", "1");
+	  }
+  }
+  
 
   for (let i = 0; i < numPlayers; i++) {
     snakes.push(new Snake(
@@ -592,6 +610,7 @@ const simulate = () => {
 
 		if (checkCollisions()) {
 		  init();
+		  isPaused = true;
 		}
 		checkEatApples();
 
@@ -604,7 +623,7 @@ const simulate = () => {
 
 const render = () => {
 
-  pixelBuffer.fill(BOARD_COLOR);
+  pixelBuffer.fill(boardColor);
 
   for (let j = 0; j < BOARD_HEIGHT; j++) {
     for (let i = 0; i < BOARD_WIDTH; i++) {
@@ -626,6 +645,26 @@ const render = () => {
   browserDisplay.render(pixelBuffer);
   display.render(pixelBuffer);
 };
+
+$(document).ready(function () {
+  $(".pick-a-color").pickAColor({
+    showSpectrum            : true,
+    showSavedColors         : true,
+    saveColorsPerElement    : true,
+    fadeMenuToggle          : true,
+    showAdvanced						: true,
+    showBasicColors         : true,
+    showHexInput            : true,
+    allowBlank							: true,
+    inlineDropdown					: true
+  });
+
+  $(".pick-a-color").on("change", function () {
+    // console.log($(this).val());
+    color = parseInt("0X" + ($(this).val()));
+    changePaintColor(color);
+  });
+});
 
 init();
 setInterval(simulate, SIMULATOR_DELAY_MILLISECONDS);
