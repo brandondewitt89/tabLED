@@ -463,11 +463,11 @@ document.getElementById("btnHome").onclick = function() {toHome()};
 document.getElementById("btnPaint").onclick = function() {toPaint()};
 
 function toHome() {
-	window.open("file:///C:/Users/brandon.dewitt/Downloads/tabLED-master/app/index.html","_self")
+	window.open("file:///Users/brandondewitt/Downloads/tabLED-master/app/index.html","_self")
 }
 
 function toPaint() {
-	window.open("file:///C:/Users/brandon.dewitt/Downloads/tabLED-master/app/paint.html","_self")
+	window.open("file:///Users/brandondewitt/Downloads/tabLED-master/app/paint.html","_self")
 }
 
 function changeAppleColor(colorIn) {
