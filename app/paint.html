@@ -11,7 +11,7 @@
     <!-- palette picker CSS -->
     <link rel="stylesheet" href="css/bootstrap-3.0.0.min.css">
     <link rel="stylesheet" href="css/pick-a-color-1.2.3.min.css">
-	
+
     <!-- for IE and mobile support -->
     <meta http-equiv="x-ua-compatible" content="IE=10">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -29,43 +29,41 @@
   </head>
 
   <body>
+    <ul>
+      <li><a href="file:///Users/brandondewitt/Downloads/tabLED-master/app/index.html">Home</a></li>
+      <li><a href="file:///Users/brandondewitt/Downloads/tabLED-master/app/paint.html">Paint</a></li>
+      <li><a href="file:///Users/brandondewitt/Downloads/tabLED-master/app/snake.html">Snake</a></li>
+    </ul>
+
+    <h1>TabLED Tester</h1>
 	<div class="row">
 		<div class="column left">
-			<h2>Mode</h2>
-			<p>
-				<button id="btnHome" class="btnStyleMode">Home</button>
-				<button id="btnPaint" class="btnStyleMode">Paint</button>
-				<button id="btnSnake" class="btnStyleMode">Snake</button>
-			</p>
-		</div>
-		<div class="column right" style="overflow: auto">
-			<h1>TabLED Tester</h1>
-			<h2>Paint</h2>
-			<div>
-			  <button id="btnSaveImage">Save Image</button>
-			  <button id="btnLoadImage">Load Image</button>
-			  <button id="btnFillPicker">Fill Picker</button>
-			  <button id="btnClear">Clear Cells</button>
+			<h2>Tools</h2>
+      <div>
+			  <button id="btnSaveImage" class="btnStyleMode">Save Image</button>
+			  <button id="btnLoadImage" class="btnStyleMode">Load Image</button>
+			  <button id="btnFillPicker" class="btnStyleMode">Fill Picker</button>
+			  <button id="btnClear" class="btnStyleMode">Clear Cells</button>
 			</div>
-			<div>
+      <div>
 			  <!-- palette picker js -->
 			  <script src="dependencies/jquery-1.9.1.min.js"></script>
 				<script src="dependencies/tinycolor-0.9.15.min.js"></script>
 				<script src="dependencies/pick-a-color-1.2.3.min.js"></script>
 			  <input type="text" value="YOUR-DEFAULT" name="YOUR-NAME" class="pick-a-color form-control">
 			</div>
+		</div>
+		<div class="column right" style="overflow: auto">
+			<h2>Paint</h2>
 			<div id='board'></div>
 		</div>
 	</div>
-	
-    
+
+
     <script src="js/tabLED.js"></script>
     <script src="js/pixel.js"></script>
     <script src="js/browser.js"></script>
     <script src="js/table.js"></script>
-
-    <!-- <script src="js/pong.js"></script> -->
-    <!-- <script src="js/snake.js"></script> -->
     <script src="js/paint.js"></script>
   </body>
 
