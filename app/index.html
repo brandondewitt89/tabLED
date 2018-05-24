@@ -4,62 +4,32 @@
 
   <head>
     <meta charset="utf-8">
-
     <link rel="stylesheet" media="screen" href="https://fontlibrary.org/face/segment7" type="text/css"/>
     <!-- <link rel="stylesheet" media="screen" href="https://fontlibrary.org/face/process" type="text/css"/> -->
 
-    <!-- palette picker CSS -->
-    <link rel="stylesheet" href="css/bootstrap-3.0.0.min.css">
-    <link rel="stylesheet" href="css/pick-a-color-1.2.3.min.css">
-
-    <!-- for IE and mobile support -->
-    <meta http-equiv="x-ua-compatible" content="IE=10">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-
     <link href="/Users/brandondewitt/Downloads/tabLED-master/app/css/style.css" rel="stylesheet" type="text/css">
-    <!-- <link href="C:\Users\brandon.dewitt\Downloads\tabLED-master\app\css\style.css" rel="stylesheet" type="text/css"> -->
-
-    <style>
-      #board {
-        width: 640px;
-        /*height: 400px;*/
-        margin: 0 auto;
-      }
-
-    </style>
+    <link href="C:\Users\brandon.dewitt\Downloads\tabLED-master\app\css\style.css" rel="stylesheet" type="text/css">
   </head>
 
   <body>
-
     <h1> TabLED Tester </h1>
-  	<h2>
-  	  <!-- <button id="btnGreen">Green</button>
-  	  <button id="btnRed">Red</button> -->
-
-      <button id="btnSaveImage">Save Image</button>
-      <button id="btnLoadImage">Load Image</button>
-      <button id="btnFillPicker">Fill Picker</button>
-	    <button id="btnClear">Clear Cells</button>
-
-  	</h2>
-    <h3>
-      <!-- palette picker js -->
-      <script src="dependencies/jquery-1.9.1.min.js"></script>
-    	<script src="dependencies/tinycolor-0.9.15.min.js"></script>
-    	<script src="dependencies/pick-a-color-1.2.3.min.js"></script>
-      <input type="text" value="YOUR-DEFAULT" name="YOUR-NAME" class="pick-a-color form-control">
-    </h3>
-
-    <div id='board'></div>
-    <script src="tabLED.js"></script>
-    <script src="js/pixel.js"></script>
-    <script src="display/browser.js"></script>
-    <script src="display/table.js"></script>
-
-    <!-- <script src="pong/pong.js"></script> -->
-    <!-- <script src="snake/snake.js"></script> -->
-    <script src="paint/paint.js"></script>
+	
+	<div class="row">
+		<div class="column left">
+			<h2>Mode</h2>
+			<div>
+				<button id="btnHome" class="btnStyleMode">Home</button>
+				<button id="btnPaint" class="btnStyleMode">Paint</button>
+				<button id="btnSnake" class="btnStyleMode">Snake</button>
+			</div>
+		</div>
+		<div class="column right">
+			<h2>Screen</h2>
+			<p>Some text..</p>
+		</div>
+	</div>
+	
+	<script src="js/index.js"></script>
   </body>
 
 </html>
