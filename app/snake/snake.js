@@ -459,8 +459,16 @@ document.addEventListener('keydown', (event) => {
   }
 });
 
-document.getElementById("btnGreen").onclick = function() {changeAppleColor(COLOR_GREEN)};
-document.getElementById("btnRed").onclick = function() {changeAppleColor(COLOR_RED)};
+document.getElementById("btnHome").onclick = function() {toHome()};
+document.getElementById("btnPaint").onclick = function() {toPaint()};
+
+function toHome() {
+	window.open("file:///C:/Users/brandon.dewitt/Downloads/tabLED-master/app/index.html","_self")
+}
+
+function toPaint() {
+	window.open("file:///C:/Users/brandon.dewitt/Downloads/tabLED-master/app/paint.html","_self")
+}
 
 function changeAppleColor(colorIn) {
     appleColor = colorIn;
