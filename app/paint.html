@@ -16,8 +16,8 @@
     <meta http-equiv="x-ua-compatible" content="IE=10">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link href="/Users/brandondewitt/Downloads/tabLED-master/app/css/style.css" rel="stylesheet" type="text/css">
-    <link href="C:\Users\brandon.dewitt\Downloads\tabLED-master\app\css\style.css" rel="stylesheet" type="text/css">
+    <link href="../app/css/style.css" rel="stylesheet" type="text/css">
+    <!-- <link href="C:\Users\brandon.dewitt\Downloads\tabLED-master\app\css\style.css" rel="stylesheet" type="text/css"> -->
 
     <style>
       #board {
@@ -29,23 +29,22 @@
   </head>
 
   <body>
-    <ul>
-      <li><a href="file:///Users/brandondewitt/Downloads/tabLED-master/app/index.html">Home</a></li>
-      <li><a href="file:///Users/brandondewitt/Downloads/tabLED-master/app/paint.html">Paint</a></li>
-      <li><a href="file:///Users/brandondewitt/Downloads/tabLED-master/app/snake.html">Snake</a></li>
+    <ul class="ulSpecial">
+      <li class="liSpecial"><a class="liaSpecial" href="../app/index.html">Home</a></li>
+      <li class="liSpecial"><a class="liaSpecial" href="../app/paint.html">Paint</a></li>
+      <li class="liSpecial"><a class="liaSpecial" href="../app/snake.html">Snake</a></li>
     </ul>
-
     <h1>TabLED Tester</h1>
 	<div class="row">
 		<div class="column left">
 			<h2>Tools</h2>
-      <div>
+			<div>
 			  <button id="btnSaveImage" class="btnStyleMode">Save Image</button>
 			  <button id="btnLoadImage" class="btnStyleMode">Load Image</button>
 			  <button id="btnFillPicker" class="btnStyleMode">Fill Picker</button>
 			  <button id="btnClear" class="btnStyleMode">Clear Cells</button>
 			</div>
-      <div>
+			<div>
 			  <!-- palette picker js -->
 			  <script src="dependencies/jquery-1.9.1.min.js"></script>
 				<script src="dependencies/tinycolor-0.9.15.min.js"></script>
@@ -58,7 +57,6 @@
 			<div id='board'></div>
 		</div>
 	</div>
-
 
     <script src="js/tabLED.js"></script>
     <script src="js/pixel.js"></script>
