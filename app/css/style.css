@@ -10,7 +10,7 @@ h1 {
   padding: 20px 0;
   color: #E0DBCC;
   font-size: 60px;
-  font-family: 'Segment7Standard';
+  /* font-family: 'Segment7Standard'; */
   font-weight: normal;
   text-align: center;
   text-shadow: 3px 3px 1px black;
@@ -37,7 +37,7 @@ body {
   margin-right: auto;
   margin-left: auto;
   background-color: #A39366;
-  padding: 0px 0px 20px 0px;
+  padding: 0px 0px 0px 0px;
   border: 5px solid #332600;
 }
 
@@ -46,7 +46,7 @@ img {
   margin: 0 auto;
 }
 
-ul {
+.ulSpecial {
     list-style-type: none;
     margin: 0;
     padding: 0;
@@ -54,12 +54,12 @@ ul {
     background-color: #332600;
 }
 
-li {
+.liSpecial {
     float: left;
     /* position: fixed; */
 }
 
-li a {
+.liaSpecial {
     display: inline-block;
     color: #E0DBCC;
     font-size: 30px;
@@ -68,8 +68,15 @@ li a {
     text-decoration: none;
 }
 
-li a:hover {
+.liaSpecial:hover {
     background-color: #513C00;
+	text-decoration: none;
+	color: #E0D1CC;
+}
+
+div {
+	margin: 0px !important;
+	/* padding: 0px !important; */
 }
 
 * {
@@ -78,9 +85,9 @@ li a:hover {
 
 .btnStyleMode {
   background-color: #846F32;
-  border: 2px solid #332600;
+  border: 3px solid #332600;
   color: #332600;
-  width: auto;
+  width: 200px;
   height: auto;
   margin: 5px;
   padding: 15px 30px;
@@ -88,6 +95,7 @@ li a:hover {
   text-decoration: none;
   display: block;
   font-size: 16px;
+  font-weight:bold;
 }
 
 .disabled {
