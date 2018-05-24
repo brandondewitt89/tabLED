@@ -52,6 +52,16 @@ document.getElementById("btnSaveImage").onclick = function() {saveImage(pixels)}
 document.getElementById("btnLoadImage").onclick = function() {loadImage()};
 document.getElementById("btnFillPicker").onclick = function() {changeFillColor(color)};
 document.getElementById("btnClear").onclick = function() {changeFillColor(COLOR_BLACK)};
+document.getElementById("btnHome").onclick = function() {toHome()};
+document.getElementById("btnSnake").onclick = function() {toSnake()};
+
+function toHome() {
+	window.open("file:///C:/Users/brandon.dewitt/Downloads/tabLED-master/app/index.html","_self")
+}
+
+function toSnake() {
+	window.open("file:///C:/Users/brandon.dewitt/Downloads/tabLED-master/app/snake.html","_self")
+}
 
 function saveImage(temp) {
   var image = new Array(BOARD_WIDTH);
