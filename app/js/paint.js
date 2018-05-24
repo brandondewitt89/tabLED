@@ -12,8 +12,8 @@ const COLOR_GREEN = 0X00FF00;
 const COLOR_BLUE  = 0X0000FF;
 
 // initial conditions
-let fillColor = 0X3C2F2F;
-let paintColor = 0X3C2F2F;
+let fillColor = 0X846F32;
+let paintColor = 0X846F32;
 
 // let paintCells = [];
 
