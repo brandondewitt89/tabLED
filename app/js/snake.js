@@ -25,14 +25,14 @@ const INIT_TABLE = [
   {
     startCell: [0, 2],
     direction: 'down',
-    bodyColor: snake1Color,
+    bodyColor: 0x938552,
     scoreColor: 0x655208,
     player: 0
   },
   {
     startCell: [BOARD_WIDTH - 1, 2],
     direction: 'down',
-    bodyColor: snake2Color,
+    bodyColor: 0x936552,
     scoreColor: 0x652408,
     player:1
   },
@@ -208,7 +208,7 @@ class Snake {
       for (let i = 0; i < scoreString.length; i++) {
         if (i === 0) {
           switch (scoreString[i]) {
-			case '0':
+			      case '0':
               this.scoreCells = this.shiftScore(1, NUM_ZERO);
               break;
             case '1':
@@ -245,7 +245,7 @@ class Snake {
               this.scoreCells = this.scoreCells.concat(this.shiftScore(5, NUM_ZERO));
               break;
             case '1':
-			  this.scoreCells = this.scoreCells.concat(this.shiftScore(5, NUM_ONE));
+			        this.scoreCells = this.scoreCells.concat(this.shiftScore(5, NUM_ONE));
               break;
             case '2':
               this.scoreCells = this.scoreCells.concat(this.shiftScore(5, NUM_TWO));
@@ -466,7 +466,7 @@ document.getElementById("btnSnake2Color").onclick = function() {changeSnake2Colo
 document.getElementById("btnAppleColor").onclick = function() {changeAppleColor(paintColor)};
 
 // if (numPlayers === 2) {
-	
+
 // }
 
 function changePaintColor(color) {
@@ -475,11 +475,11 @@ function changePaintColor(color) {
 }
 
 function changeSnake1Color(colorIn) {
-    snakes[0].bodyColor = colorIn;
+    snake1Color = colorIn;
 }
 
 function changeSnake2Color(colorIn) {
-    snakes[1].bodyColor = colorIn;
+    snake2Color = colorIn;
 }
 
 function changeAppleColor(colorIn) {
@@ -502,7 +502,7 @@ const init = () => {
 		  numPlayers = prompt("Please enter number of players (1 or 2)", "1");
 	  }
   }
-  
+
 
   for (let i = 0; i < numPlayers; i++) {
     snakes.push(new Snake(
