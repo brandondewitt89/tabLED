@@ -36,12 +36,13 @@
     </ul>
     <h1>TabLED Tester</h1>
 	<div class="row">
-    	<div class="column left">
-    		<h2>Tools</h2>
+		<div class="column left">
+			<h2>Tools</h2>
 			<div>
-			  <button id="btnDefault" class="btnStyleMode">Default Colors</button>
-			  <button id="btnSnakeColor" class="btnStyleMode">Snake Color</button>
-			  <button id="btnAppleColor" class="btnStyleMode">Apple Color</button>
+			  <button id="btnSaveImage" class="btnStyleMode">Save Image</button>
+			  <button id="btnLoadImage" class="btnStyleMode">Load Image</button>
+			  <button id="btnFillPicker" class="btnStyleMode">Fill Picker</button>
+			  <button id="btnClear" class="btnStyleMode">Clear Cells</button>
 			</div>
 			<div>
 			  <!-- palette picker js -->
@@ -50,18 +51,18 @@
 				<script src="dependencies/pick-a-color-1.2.3.min.js"></script>
 			  <input type="text" value="YOUR-DEFAULT" name="YOUR-NAME" class="pick-a-color form-control">
 			</div>
-    	</div>
-    	<div class="column right" style="overflow: auto">
-    		<h2>Snake</h2>
+		</div>
+		<div class="column right" style="overflow: auto">
+			<h2>Paint</h2>
 			<div id='board'></div>
-    	</div>
-    </div>
-    
+		</div>
+	</div>
+
     <script src="js/tabLED.js"></script>
     <script src="js/pixel.js"></script>
     <script src="js/browser.js"></script>
     <script src="js/table.js"></script>
-    <script src="js/snake.js"></script>
+    <script src="js/paint.js"></script>
   </body>
 
 </html>
