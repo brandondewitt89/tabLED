@@ -10,8 +10,21 @@
     <link rel="stylesheet" href="css/bootstrap-3.0.0.min.css">
     <link rel="stylesheet" href="css/pick-a-color-1.2.3.min.css">
 
+    <!-- for IE and mobile support -->
+    <meta http-equiv="x-ua-compatible" content="IE=10">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <link href="../app/css/style.css" rel="stylesheet" type="text/css">
     <!-- <link href="C:\Users\brandon.dewitt\Downloads\tabLED-master\app\css\style.css" rel="stylesheet" type="text/css"> -->
+
+    <style>
+      #board {
+        width: 640px;
+        /*height: 400px;*/
+        margin: 0 auto;
+      }
+    </style>
+
   </head>
 
   <body>
@@ -19,6 +32,9 @@
       <li class="liSpecial"><a class="liaSpecial" href="../app/index.html">Home</a></li>
       <li class="liSpecial"><a class="liaSpecial" href="../app/paint.html">Paint</a></li>
       <li class="liSpecial"><a class="liaSpecial" href="../app/snake.html">Snake</a></li>
+      <!-- <li class="liSpecial"><a class="liaSpecial" href="..\app\index.html">Home</a></li>
+      <li class="liSpecial"><a class="liaSpecial" href="..\app\paint.html">Paint</a></li>
+      <li class="liSpecial"><a class="liaSpecial" href="..\app\snake.html">Snake</a></li> -->
     </ul>
 
     <h1>TabLED Tester</h1>
@@ -28,11 +44,15 @@
     	</div>
     	<div class="column right">
     		<h2>Screen</h2>
-    		<p>Some text..</p>
+    		<div id='board'></div>
     	</div>
     </div>
 
-	<script src="js/index.js"></script>
+  <script src="js/tabLED.js"></script>
+  <script src="js/pixel.js"></script>
+  <script src="js/browser.js"></script>
+  <script src="js/table.js"></script>
+  <script src="js/index.js"></script>
   </body>
 
 </html>
