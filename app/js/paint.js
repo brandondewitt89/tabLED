@@ -115,18 +115,18 @@ for (var j = 0; j < BOARD_HEIGHT; j++) {
   }
 }
 
-const containsCell = (list, cellToCheck) => {
-  for (let cell of list) {
-    if (cellsEqual(cell, cellToCheck)) {
-      return true;
-    }
-  }
-  return false;
-};
+// const containsCell = (list, cellToCheck) => {
+  // for (let cell of list) {
+    // if (cellsEqual(cell, cellToCheck)) {
+      // return true;
+    // }
+  // }
+  // return false;
+// };
 
-const cellsEqual = (a, b) => {
-  return a[0] === b[0] && a[1] === b[1];
-};
+// const cellsEqual = (a, b) => {
+  // return a[0] === b[0] && a[1] === b[1];
+// };
 
 // function clearPaintCells(list) {
 //   list.splice(0);
