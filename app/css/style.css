@@ -7,9 +7,9 @@ html {
 
 h1 {
   margin: 0;
-  padding: 20px 0;
+  padding: 15px 0;
   color: #E0DBCC;
-  font-size: 60px;
+  font-size: 40px;
   /* font-family: 'Segment7Standard'; */
   font-weight: normal;
   text-align: center;
@@ -17,8 +17,8 @@ h1 {
 }
 
 h2 {
-  margin: 0;
-  padding: 20px;
+  margin: 0px;
+  padding: 0px;
   color: #332600;
   font-size: 30px;
 }
@@ -62,14 +62,14 @@ img {
 .liaSpecial {
     display: inline-block;
     color: #E0DBCC;
-    font-size: 30px;
+    font-size: 20px;
     text-align: center;
-    padding: 14px 16px;
+    padding: 12px 16px;
     text-decoration: none;
 }
 
 .liaSpecial:hover {
-    background-color: #513C00;
+  background-color: #513C00;
 	text-decoration: none;
 	color: #E0D1CC;
 }
@@ -107,8 +107,9 @@ div {
 .column {
   float: left;
   /* margin: 20px; */
-  padding: 20px;
-  height: 500px; /* Should be removed. Only for demonstration */
+  padding: 15px;
+  height: 450px; /* Should be removed. Only for demonstration */
+  font-size: 10px;
 }
 
 .left {
