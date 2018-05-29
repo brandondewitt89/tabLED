@@ -16,8 +16,8 @@
     <meta http-equiv="x-ua-compatible" content="IE=10">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link href="/Users/brandondewitt/Downloads/tabLED-master/app/css/style.css" rel="stylesheet" type="text/css">
-    <link href="C:\Users\brandon.dewitt\Downloads\tabLED-master\app\css\style.css" rel="stylesheet" type="text/css">
+    <link href="../app/css/style.css" rel="stylesheet" type="text/css">
+    <!-- <link href="C:\Users\brandon.dewitt\Downloads\tabLED-master\app\css\style.css" rel="stylesheet" type="text/css"> -->
 
     <style>
       #board {
@@ -29,34 +29,39 @@
   </head>
 
   <body>
-    <ul>
-      <li><a href="file:///Users/brandondewitt/Downloads/tabLED-master/app/index.html">Home</a></li>
-      <li><a href="file:///Users/brandondewitt/Downloads/tabLED-master/app/paint.html">Paint</a></li>
-      <li><a href="file:///Users/brandondewitt/Downloads/tabLED-master/app/snake.html">Snake</a></li>
+    <ul class="ulSpecial">
+      <li class="liSpecial"><a class="liaSpecial" href="../app/index.html">Home</a></li>
+      <li class="liSpecial"><a class="liaSpecial" href="../app/paint.html">Paint</a></li>
+      <li class="liSpecial"><a class="liaSpecial" href="../app/snake.html">Snake</a></li>
     </ul>
-    <h1> TabLED Tester </h1>
-  	<h2>
-	  </h2>
-  	<h3>
-	  <button id="btnSaveImage">Save Image</button>
-      <button id="btnLoadImage">Load Image</button>
-      <button id="btnFillPicker">Fill Picker</button>
-	  <button id="btnClear">Clear Cells</button>
-	</h3>
-    <h4>
-      <!-- palette picker js -->
-      <script src="dependencies/jquery-1.9.1.min.js"></script>
-    	<script src="dependencies/tinycolor-0.9.15.min.js"></script>
-    	<script src="dependencies/pick-a-color-1.2.3.min.js"></script>
-      <input type="text" value="YOUR-DEFAULT" name="YOUR-NAME" class="pick-a-color form-control">
-    </h4>
+    <h1>TabLED Tester</h1>
+	<div class="row">
+    	<div class="column left">
+    		<h2>Tools</h2>
+			<div>
+			  <button id="btnDefault" class="btnStyleMode">Default Colors</button>
+			  <button id="btnSnake1Color" class="btnStyleMode">P1 Snake Color</button>
+        <button id="btnSnake2Color" class="btnStyleMode">P2 Snake Color</button>
+			  <button id="btnAppleColor" class="btnStyleMode">Apple Color</button>
+			</div>
+			<div>
+			  <!-- palette picker js -->
+			  <script src="dependencies/jquery-1.9.1.min.js"></script>
+				<script src="dependencies/tinycolor-0.9.15.min.js"></script>
+				<script src="dependencies/pick-a-color-1.2.3.min.js"></script>
+			  <input type="text" value="YOUR-DEFAULT" name="YOUR-NAME" class="pick-a-color form-control">
+			</div>
+    	</div>
+    	<div class="column right" style="overflow: auto">
+    		<h2>Snake</h2>
+			<div id='board'></div>
+    	</div>
+    </div>
 
-    <div id='board'></div>
     <script src="js/tabLED.js"></script>
     <script src="js/pixel.js"></script>
     <script src="js/browser.js"></script>
     <script src="js/table.js"></script>
-
     <script src="js/snake.js"></script>
   </body>
 
