@@ -11,42 +11,32 @@ const COLOR_RED   = 0XFF0000;
 const COLOR_GREEN = 0X00FF00;
 const COLOR_BLUE  = 0X0000FF;
 
-const NUM_ZERO =  [ [0, 2], [0, 3], [0, 4], [1, 1], [1, 5], [2, 2], [2, 3], [2, 4] ];
-const NUM_ONE =   [ [0, 2], [0, 5], [1, 1], [1, 2], [1, 3], [1, 4], [1, 5], [2, 5] ];
-const NUM_TWO =   [ [0, 1], [0, 4], [0, 5], [1, 1], [1, 3], [1, 5], [2, 2], [2, 5] ];
-const NUM_THREE = [ [0, 1], [0, 5], [1, 1], [1, 3], [1, 5], [2, 1], [2, 2], [2, 3], [2, 4], [2, 5] ];
-const NUM_FOUR =  [ [0, 1], [0, 2], [0, 3], [1, 3], [2, 1], [2, 2], [2, 3], [2, 4], [2, 5] ];
-const NUM_FIVE =  [ [0, 1], [0, 2], [0, 3], [0, 5], [1, 1], [1, 3], [1, 5], [2, 1], [2, 3], [2, 4] ];
-const NUM_SIX =   [ [0, 2], [0, 3], [0, 4], [0, 5], [1, 1], [1, 3], [1, 5], [2, 1], [2, 3], [2, 4], [2, 5] ];
-const NUM_SEVEN = [ [0, 1], [0, 4], [0, 5], [1, 1], [1, 3], [2, 1], [2, 2] ];
-const NUM_EIGHT = [ [0, 1], [0, 2], [0, 3], [0, 4], [0, 5], [1, 1], [1, 3], [1, 5], [2, 1], [2, 2], [2, 3], [2, 4], [2, 5] ];
-const NUM_NINE =  [ [0, 1], [0, 2], [0, 3], [0, 5], [1, 1], [1, 3], [1, 5], [2, 1], [2, 2], [2, 3], [2, 4] ];
-
 // initial conditions
 let fillColor = 0X846F32;
 let paintColor = 0X846F32;
 
 let scrollX = 2;
 let paintCells = [];
-let messageString = "1234";
+let messageString = "0123456789";
 let messageCharArray = [];
 
-messageCharArray = messageString.split();
+messageCharArray = messageString.split("");
 
 console.log("messageString: " + messageString);
 console.log("messageCharArray: " + messageCharArray[1]);
+console.log("messageCharArray.length: " + messageCharArray.length);
 
-var scrollText = new Array(message.length);
+var scrollText = new Array(messageCharArray.length);
 for (var i = 0; i < scrollText.length; i++) {
   scrollText[i] = new Character();
+  scrollText[i].convertCharToMatrix(messageCharArray[i]);
+  paintCells = paintCells.concat(scrollText[i].shiftChar(4*i + 1, 4));
 }
-// scrollText[0] = new Character(COLOR_GREEN, "2");
 
 var pixels = new Array(BOARD_WIDTH);
 for (var i = 0; i < pixels.length; i++) {
   pixels[i] = new Array(BOARD_HEIGHT);
 }
-
 
 for (var j = 0; j < BOARD_HEIGHT; j++) {
   for (var i = 0; i < BOARD_WIDTH; i++) {
@@ -84,21 +74,10 @@ const cellsEqual = (a, b) => {
 // document.getElementById("btnFillPicker").onclick = function() {changeFillColor(color)};
 // document.getElementById("btnClear").onclick = function() {changeFillColor(COLOR_BLACK)};
 
-
 for (var j = 0; j < BOARD_HEIGHT; j++) {
   for (var i = 0; i < BOARD_WIDTH; i++) {
     pixelBuffer[j * BOARD_WIDTH + i] = pixels[i][j].getColor();
   }
-}
-
-function shiftScore(shiftByX, shiftByY, number) {
-	let shiftedNumber = [];
-	for (let [i, j] of number) {
-		i += shiftByX;
-		j += shiftByY;
-		shiftedNumber = shiftedNumber.concat([[i, j]])
-	}
-	return shiftedNumber;
 }
 
 const simulate = () => {
@@ -108,8 +87,7 @@ const simulate = () => {
   else {
 	  scrollX++;
   }
-  // paintCells = shiftScore(scrollX, 4, NUM_ZERO);
-  paintCells = scrollText[1].convertCharToMatrix("1");
+  // paintCells = scrollText[1].convertCharToMatrix("1");
   render();
 };
 
