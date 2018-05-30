@@ -5,17 +5,18 @@ function Character(color, charString) {
   this.previousColor    = null;
   this.charMatrix       = [];
   
-	this.NUM_ZERO =  [ [0, 2], [0, 3], [0, 4], [1, 1], [1, 5], [2, 2], [2, 3], [2, 4] ];
-	this.NUM_ONE =   [ [0, 2], [0, 5], [1, 1], [1, 2], [1, 3], [1, 4], [1, 5], [2, 5] ];
-	this.NUM_TWO =   [ [0, 1], [0, 4], [0, 5], [1, 1], [1, 3], [1, 5], [2, 2], [2, 5] ];
+	this.NUM_ZERO  = [ [0, 2], [0, 3], [0, 4], [1, 1], [1, 5], [2, 2], [2, 3], [2, 4] ];
+	this.NUM_ONE   = [ [0, 2], [0, 5], [1, 1], [1, 2], [1, 3], [1, 4], [1, 5], [2, 5] ];
+	this.NUM_TWO   = [ [0, 1], [0, 4], [0, 5], [1, 1], [1, 3], [1, 5], [2, 2], [2, 5] ];
 	this.NUM_THREE = [ [0, 1], [0, 5], [1, 1], [1, 3], [1, 5], [2, 1], [2, 2], [2, 3], [2, 4], [2, 5] ];
-	this.NUM_FOUR =  [ [0, 1], [0, 2], [0, 3], [1, 3], [2, 1], [2, 2], [2, 3], [2, 4], [2, 5] ];
-	this.NUM_FIVE =  [ [0, 1], [0, 2], [0, 3], [0, 5], [1, 1], [1, 3], [1, 5], [2, 1], [2, 3], [2, 4] ];
-	this.NUM_SIX =   [ [0, 2], [0, 3], [0, 4], [0, 5], [1, 1], [1, 3], [1, 5], [2, 1], [2, 3], [2, 4], [2, 5] ];
+	this.NUM_FOUR  = [ [0, 1], [0, 2], [0, 3], [1, 3], [2, 1], [2, 2], [2, 3], [2, 4], [2, 5] ];
+	this.NUM_FIVE  = [ [0, 1], [0, 2], [0, 3], [0, 5], [1, 1], [1, 3], [1, 5], [2, 1], [2, 3], [2, 4] ];
+	this.NUM_SIX   = [ [0, 2], [0, 3], [0, 4], [0, 5], [1, 1], [1, 3], [1, 5], [2, 1], [2, 3], [2, 4], [2, 5] ];
 	this.NUM_SEVEN = [ [0, 1], [0, 4], [0, 5], [1, 1], [1, 3], [2, 1], [2, 2] ];
 	this.NUM_EIGHT = [ [0, 1], [0, 2], [0, 3], [0, 4], [0, 5], [1, 1], [1, 3], [1, 5], [2, 1], [2, 2], [2, 3], [2, 4], [2, 5] ];
-	this.NUM_NINE =  [ [0, 1], [0, 2], [0, 3], [0, 5], [1, 1], [1, 3], [1, 5], [2, 1], [2, 2], [2, 3], [2, 4] ];
+	this.NUM_NINE  = [ [0, 1], [0, 2], [0, 3], [0, 5], [1, 1], [1, 3], [1, 5], [2, 1], [2, 2], [2, 3], [2, 4] ];
 	this.CHAR_A    = [ [0, 2], [0, 3], [0, 4], [1, 1], [1, 5], [2, 2], [2, 3], [2, 4] ];
+	
 }
 
 
@@ -66,3 +67,15 @@ Character.prototype.convertCharToMatrix = function (charString) {
   }
   return this.charMatrix;
 };
+
+Character.prototype.shiftChar = function (shiftByX, shiftByY) {
+	let charMatrixShifted = [];
+	for (let [i, j] of this.charMatrix) {
+		i += shiftByX;
+		j += shiftByY;
+		charMatrixShifted = charMatrixShifted.concat([[i, j]])
+	}
+	this.charMatrix = charMatrixShifted
+	return this.charMatrix;
+}
+
