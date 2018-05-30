@@ -15,22 +15,23 @@ const COLOR_BLUE  = 0X0000FF;
 let fillColor = 0X846F32;
 let paintColor = 0X846F32;
 
-let scrollX = 2;
+let scrollX = -1;
+let frameCount = 0;
 let paintCells = [];
 let messageString = "0123456789";
 let messageCharArray = [];
 
 messageCharArray = messageString.split("");
 
-console.log("messageString: " + messageString);
-console.log("messageCharArray: " + messageCharArray[1]);
-console.log("messageCharArray.length: " + messageCharArray.length);
+// console.log("messageString: " + messageString);
+// console.log("messageCharArray: " + messageCharArray[1]);
+// console.log("messageCharArray.length: " + messageCharArray.length);
 
 var scrollText = new Array(messageCharArray.length);
 for (var i = 0; i < scrollText.length; i++) {
   scrollText[i] = new Character();
   scrollText[i].convertCharToMatrix(messageCharArray[i]);
-  paintCells = paintCells.concat(scrollText[i].shiftChar(4*i + 1, 4));
+  paintCells = paintCells.concat(scrollText[i].shiftChar(4*i + BOARD_WIDTH, 4));
 }
 
 var pixels = new Array(BOARD_WIDTH);
@@ -81,11 +82,17 @@ for (var j = 0; j < BOARD_HEIGHT; j++) {
 }
 
 const simulate = () => {
-  if (scrollX >= 31) {
-	  scrollX = 0;
+  if (frameCount >= 4*scrollText.length + BOARD_WIDTH) {
+	  scrollX = 4*scrollText.length + BOARD_WIDTH;
+	  frameCount = 0;
   }
   else {
-	  scrollX++;
+	  scrollX = -1;
+	  frameCount++;
+  }
+  paintCells = paintCells.splice();
+  for (var i = 0; i < scrollText.length; i++) {
+	  paintCells = paintCells.concat(scrollText[i].shiftChar(scrollX, 0));
   }
   // paintCells = scrollText[1].convertCharToMatrix("1");
   render();
