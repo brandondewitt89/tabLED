@@ -25,13 +25,27 @@ function Character(color, charString) {
 	this.CHAR_H    = [ [0, 0], [0, 1], [0, 2], [0, 3], [0, 4], [1, 2], [2, 0], [2, 1], [2, 2], [2, 3], [2, 4] ];
 	this.CHAR_I    = [ [0, 0], [0, 4], [1, 0], [1, 1], [1, 2], [1, 3], [1, 4], [2, 0], [2, 4] ];
 	this.CHAR_J    = [ [0, 0], [0, 3], [1, 0], [1, 4], [2, 0], [2, 1], [2, 2], [2, 3] ];
+	this.CHAR_K    = [ [0, 0], [0, 1], [0, 2], [0, 3], [0, 4], [1, 2], [2, 0], [2, 1], [2, 3], [2, 4] ];
+	this.CHAR_L    = [ [0, 0], [0, 1], [0, 2], [0, 3], [0, 4], [1, 4], [2, 4] ];
+	this.CHAR_M    = [ [0, 0], [0, 1], [0, 2], [0, 3], [0, 4], [1, 1], [1, 2], [2, 0], [2, 1], [2, 2], [2, 3], [2, 4] ];
+	this.CHAR_N    = [ [0, 0], [0, 1], [0, 2], [0, 3], [0, 4], [1, 0], [1, 1], [2, 1], [2, 2], [2, 3], [2, 4] ];
+	this.CHAR_O    = [ [0, 0], [0, 1], [0, 2], [0, 3], [0, 4], [1, 0], [1, 4], [2, 0], [2, 1], [2, 2], [2, 3], [2, 4] ];
+	this.CHAR_P    = [ [0, 0], [0, 1], [0, 2], [0, 3], [0, 4], [1, 0], [1, 2], [2, 0], [2, 1], [2, 2] ];
+	this.CHAR_Q    = [ [0, 0], [0, 1], [0, 2], [0, 3], [1, 0], [1, 3], [1, 4], [2, 0], [2, 1], [2, 2], [2, 4] ];
+	this.CHAR_R    = [ [0, 0], [0, 1], [0, 2], [0, 3], [0, 4], [1, 0], [1, 2], [2, 1], [2, 3], [2, 4] ];
+	this.CHAR_S    = [ [0, 1], [0, 4], [1, 0], [1, 2], [1, 4], [2, 0], [2, 3] ];
+	this.CHAR_T    = [ [0, 0], [1, 0], [1, 1], [1, 2], [1, 3], [1, 4], [2, 0] ];
+	this.CHAR_U    = [ [0, 0], [0, 1], [0, 2], [0, 3], [0, 4], [1, 4], [2, 0], [2, 1], [2, 2], [2, 3], [2, 4] ];
+	this.CHAR_V    = [ [0, 0], [0, 1], [0, 2], [0, 3], [0, 4], [1, 3], [1, 4], [2, 0], [2, 1], [2, 2] ];
+	this.CHAR_W    = [ [0, 0], [0, 1], [0, 2], [0, 3], [0, 4], [1, 2], [1, 3], [2, 0], [2, 1], [2, 2], [2, 3], [2, 4] ];
+	this.CHAR_X    = [ [0, 0], [0, 1], [0, 3], [0, 4], [1, 2], [1, 3], [2, 0], [2, 1], [2, 3], [2, 4] ];
+	this.CHAR_Y    = [ [0, 0], [0, 1], [0, 2], [1, 2], [1, 3], [1, 4], [2, 0], [2, 1], [2, 2] ];
+	this.CHAR_Z    = [ [0, 0], [0, 3], [0, 4], [1, 0], [1, 2], [1, 4], [2, 0], [2, 1], [2, 4] ];
+	this.CHAR_EXP  = [ [2, 0], [2, 1], [2, 2], [2, 4] ];
+	this.CHAR_PER  = [ [2, 4] ];
+	this.CHAR_QUE  = [ [0, 0], [1, 0], [1, 2], [1, 4], [2, 0], [2, 1], [2, 2] ];
+	this.CHAR_COM  = [ [1, 3], [2, 3], [2, 4] ];
 	
-	// this.CHAR_I    = [ [0, 0], [0, 1], [0, 2], [0, 3], [0, 4], [1, 0], [1, 2], [1, 4], [2, 0], [2, 1], [2, 2], [2, 3], [2, 4] ];
-	// this.CHAR_I    = [ [0, 0], [0, 1], [0, 2], [0, 3], [0, 4], [1, 0], [1, 2], [1, 4], [2, 0], [2, 1], [2, 2], [2, 3], [2, 4] ];
-	// this.CHAR_I    = [ [0, 0], [0, 1], [0, 2], [0, 3], [0, 4], [1, 0], [1, 2], [1, 4], [2, 0], [2, 1], [2, 2], [2, 3], [2, 4] ];
-	// this.CHAR_I    = [ [0, 0], [0, 1], [0, 2], [0, 3], [0, 4], [1, 0], [1, 2], [1, 4], [2, 0], [2, 1], [2, 2], [2, 3], [2, 4] ];
-	// this.CHAR_I    = [ [0, 0], [0, 1], [0, 2], [0, 3], [0, 4], [1, 0], [1, 2], [1, 4], [2, 0], [2, 1], [2, 2], [2, 3], [2, 4] ];
-	// this.CHAR_I    = [ [0, 0], [0, 1], [0, 2], [0, 3], [0, 4], [1, 0], [1, 2], [1, 4], [2, 0], [2, 1], [2, 2], [2, 3], [2, 4] ];
 	
 	
 }
@@ -107,7 +121,66 @@ Character.prototype.convertCharToMatrix = function (charString) {
 	case 'J':
       this.charMatrix = this.CHAR_J;
       break;
-	
+	case 'K':
+      this.charMatrix = this.CHAR_K;
+      break;
+	case 'L':
+      this.charMatrix = this.CHAR_L;
+      break;
+	case 'M':
+      this.charMatrix = this.CHAR_M;
+      break;
+	case 'N':
+      this.charMatrix = this.CHAR_N;
+      break;
+	case 'O':
+      this.charMatrix = this.CHAR_O;
+      break;
+	case 'P':
+      this.charMatrix = this.CHAR_P;
+      break;
+	case 'Q':
+      this.charMatrix = this.CHAR_Q;
+      break;
+	case 'R':
+      this.charMatrix = this.CHAR_R;
+      break;
+	case 'S':
+      this.charMatrix = this.CHAR_S;
+      break;
+	case 'T':
+      this.charMatrix = this.CHAR_T;
+      break;
+	case 'U':
+      this.charMatrix = this.CHAR_U;
+      break;
+	case 'V':
+      this.charMatrix = this.CHAR_V;
+      break;
+	case 'W':
+      this.charMatrix = this.CHAR_W;
+      break;
+	case 'X':
+      this.charMatrix = this.CHAR_X;
+      break;
+	case 'Y':
+      this.charMatrix = this.CHAR_Y;
+      break;
+	case 'Z':
+      this.charMatrix = this.CHAR_Z;
+      break;
+	case '!':
+      this.charMatrix = this.CHAR_EXP;
+      break;
+	case '.':
+      this.charMatrix = this.CHAR_PER;
+      break;
+	case '?':
+      this.charMatrix = this.CHAR_QUE;
+      break;
+	case ',':
+      this.charMatrix = this.CHAR_COM;
+      break;
 	
 	
 	
