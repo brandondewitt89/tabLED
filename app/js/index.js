@@ -18,7 +18,7 @@ let paintColor = 0X846F32;
 let scrollX = -1;
 let frameCount = 0;
 let paintCells = [];
-let messageString = "0123456789";
+let messageString = "ABCDEFGHIJ";
 let messageCharArray = [];
 
 messageCharArray = messageString.split("");
@@ -31,7 +31,7 @@ var scrollText = new Array(messageCharArray.length);
 for (var i = 0; i < scrollText.length; i++) {
   scrollText[i] = new Character();
   scrollText[i].convertCharToMatrix(messageCharArray[i]);
-  paintCells = paintCells.concat(scrollText[i].shiftChar(4*i + BOARD_WIDTH, 4));
+  paintCells = paintCells.concat(scrollText[i].shiftChar(4*i + BOARD_WIDTH, 5));
 }
 
 var pixels = new Array(BOARD_WIDTH);
