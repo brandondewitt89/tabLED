@@ -18,21 +18,20 @@ let paintColor = 0X846F32;
 let scrollX = -1;
 let frameCount = 0;
 let paintCells = [];
-let messageString = "ABCDEFGHIJ";
+let messageString = "HELLO COFFEE!!!";
 let messageCharArray = [];
 
 messageCharArray = messageString.split("");
-
-// console.log("messageString: " + messageString);
-// console.log("messageCharArray: " + messageCharArray[1]);
-// console.log("messageCharArray.length: " + messageCharArray.length);
-
-var scrollText = new Array(messageCharArray.length);
+let scrollText = new Array(messageCharArray.length);
 for (var i = 0; i < scrollText.length; i++) {
   scrollText[i] = new Character();
   scrollText[i].convertCharToMatrix(messageCharArray[i]);
   paintCells = paintCells.concat(scrollText[i].shiftChar(4*i + BOARD_WIDTH, 5));
 }
+
+// console.log("messageString: " + messageString);
+// console.log("messageCharArray: " + messageCharArray[1]);
+// console.log("messageCharArray.length: " + messageCharArray.length);
 
 var pixels = new Array(BOARD_WIDTH);
 for (var i = 0; i < pixels.length; i++) {
@@ -70,10 +69,21 @@ const cellsEqual = (a, b) => {
   return a[0] === b[0] && a[1] === b[1];
 };
 
-// document.getElementById("btnSaveImage").onclick = function() {saveImage(pixels)};
-// document.getElementById("btnLoadImage").onclick = function() {loadImage()};
-// document.getElementById("btnFillPicker").onclick = function() {changeFillColor(color)};
-// document.getElementById("btnClear").onclick = function() {changeFillColor(COLOR_BLACK)};
+document.getElementById("btnScrollText").onclick = function() {displayText()};
+
+function displayText() {
+	messageString = document.getElementById("textInput").value;
+	messageCharArray = messageString.split("");
+	scrollText = scrollText.splice();
+	scrollText = new Array(messageCharArray.length);
+	paintCells = paintCells.splice();
+	frameCount = 0;
+	for (var i = 0; i < scrollText.length; i++) {
+	  scrollText[i] = new Character();
+	  scrollText[i].convertCharToMatrix(messageCharArray[i]);
+	  paintCells = paintCells.concat(scrollText[i].shiftChar(4*i + BOARD_WIDTH, 5));
+	}
+}
 
 for (var j = 0; j < BOARD_HEIGHT; j++) {
   for (var i = 0; i < BOARD_WIDTH; i++) {
