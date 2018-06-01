@@ -18,7 +18,7 @@ let paintColor = 0X846F32;
 let scrollX = -1;
 let frameCount = 0;
 let paintCells = [];
-let messageString = "HELLO COFFEE!!!";
+let messageString = "HELLO COFFEE TABLE!!!";
 let messageCharArray = [];
 
 messageCharArray = messageString.split("");
