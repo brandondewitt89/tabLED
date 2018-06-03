@@ -85,6 +85,12 @@ function displayText() {
 	}
 }
 
+function changePaintColor(color) {
+    paintColor = color;
+    // return fillColor;
+	// alert ("Color Change!");
+}
+
 for (var j = 0; j < BOARD_HEIGHT; j++) {
   for (var i = 0; i < BOARD_WIDTH; i++) {
     pixelBuffer[j * BOARD_WIDTH + i] = pixels[i][j].getColor();
@@ -124,35 +130,35 @@ const render = () => {
 };
 
 // function printMousePos(event) {
-	// var relX = event.offsetX;
-	// var relY = event.offsetY;
-	// var PixelX = Math.trunc(relX / 20);
-	// var PixelY = Math.trunc(relY / 20);
-
-  // pixels[PixelX][PixelY].setColor(paintColor);
-	// }
-
+// 	var relX = event.offsetX;
+// 	var relY = event.offsetY;
+// 	var PixelX = Math.trunc(relX / 20);
+// 	var PixelY = Math.trunc(relY / 20);
+//
+//   pixels[PixelX][PixelY].setColor(paintColor);
+// 	}
+//
 // browserDisplay._canvas.addEventListener("click", printMousePos);
 
-// $(document).ready(function () {
-  // $(".pick-a-color").pickAColor({
-    // showSpectrum            : true,
-    // showSavedColors         : true,
-    // saveColorsPerElement    : true,
-    // fadeMenuToggle          : true,
-    // showAdvanced						: true,
-    // showBasicColors         : true,
-    // showHexInput            : true,
-    // allowBlank							: true,
-    // inlineDropdown					: true
-  // });
+$(document).ready(function () {
+  $(".pick-a-color").pickAColor({
+    showSpectrum            : true,
+    showSavedColors         : true,
+    saveColorsPerElement    : true,
+    fadeMenuToggle          : true,
+    showAdvanced						: true,
+    showBasicColors         : true,
+    showHexInput            : true,
+    allowBlank							: true,
+    inlineDropdown					: true
+  });
 
-  // $(".pick-a-color").on("change", function () {
-    // console.log($(this).val());
-    // color = parseInt("0X" + ($(this).val()));
-    // changePaintColor(color);
-  // });
-// });
+  $(".pick-a-color").on("change", function () {
+    console.log($(this).val());
+    color = parseInt("0X" + ($(this).val()));
+    changePaintColor(color);
+  });
+});
 
 // init();
 
