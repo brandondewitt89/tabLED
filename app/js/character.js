@@ -4,7 +4,7 @@ function Character(color, charString) {
 
   this.previousColor    = null;
   this.charMatrix       = [];
-  
+
 	this.NUM_ZERO  = [ [0, 1], [0, 2], [0, 3], [1, 0], [1, 4], [2, 1], [2, 2], [2, 3] ];
 	this.NUM_ONE   = [ [0, 1], [0, 4], [1, 0], [1, 1], [1, 2], [1, 3], [1, 4], [2, 4] ];
 	this.NUM_TWO   = [ [0, 0], [0, 3], [0, 4], [1, 0], [1, 2], [1, 4], [2, 1], [2, 4] ];
@@ -45,9 +45,15 @@ function Character(color, charString) {
 	this.CHAR_PER  = [ [2, 4] ];
 	this.CHAR_QUE  = [ [0, 0], [1, 0], [1, 2], [1, 4], [2, 0], [2, 1], [2, 2] ];
 	this.CHAR_COM  = [ [1, 3], [2, 3], [2, 4] ];
-	
-	
-	
+
+  this.CHAR_FOR_SLSH = [ [0, 3], [0, 4], [1, 2], [2, 0], [2, 1] ];
+	this.CHAR_BCK_SLSH = [ [0, 0], [0, 1], [1, 2], [2, 3], [2, 4] ];
+  this.CHAR_FOR_PRTH = [ [1, 1], [1, 2], [1, 3], [2, 0], [2, 4] ];
+  this.CHAR_BCK_PRTH = [ [0, 0], [0, 4], [1, 1], [1, 2], [1, 3] ];
+  this.CHAR_FOR_BRCK = [ [1, 0], [1, 1], [1, 2], [1, 3], [1, 4], [2, 0], [2, 4] ];
+  this.CHAR_BCK_BRCK = [ [0, 0], [0, 4], [1, 0], [1, 1], [1, 2], [1, 3], [1, 4] ];
+  // this.CHAR_FOR_SLSH = [ [0, 0], [0, 1], [0, 2], [0, 3], [0, 4], [1, 0], [1, 2], [1, 4], [2, 0], [2, 1], [2, 2], [2, 3], [2, 4] ];
+
 }
 
 
@@ -181,11 +187,34 @@ Character.prototype.convertCharToMatrix = function (charString) {
 	case ',':
       this.charMatrix = this.CHAR_COM;
       break;
-	
-	
-	
-	
-	
+  case '/':
+      this.charMatrix = this.CHAR_FOR_SLSH;
+      break;
+  case '\\':
+      this.charMatrix = this.CHAR_BCK_SLSH;
+      break;
+  case '(':
+      this.charMatrix = this.CHAR_FOR_PRTH;
+      break;
+  case ')':
+      this.charMatrix = this.CHAR_BCK_PRTH;
+      break;
+  case '[':
+      this.charMatrix = this.CHAR_FOR_BRCK;
+      break;
+  case ']':
+      this.charMatrix = this.CHAR_BCK_BRCK;
+      break;
+
+
+
+
+
+
+
+
+
+
   }
   return this.charMatrix;
 };
@@ -200,4 +229,3 @@ Character.prototype.shiftChar = function (shiftByX, shiftByY) {
 	this.charMatrix = charMatrixShifted
 	return this.charMatrix;
 }
-
