@@ -152,7 +152,18 @@ function printMousePos(event) {
   pixels[PixelX][PixelY].setColor(paintColor);
 	}
 
-browserDisplay._canvas.addEventListener("click", printMousePos);
+function startDragPaint(event) {
+  printMousePos(event);
+  browserDisplay._canvas.addEventListener("mousemove", printMousePos);
+}
+
+function stopDragPaint() {
+  browserDisplay._canvas.removeEventListener("mousemove", printMousePos);
+}
+
+browserDisplay._canvas.addEventListener("mousedown", startDragPaint);
+browserDisplay._canvas.addEventListener("mouseup", stopDragPaint);
+
 
 $(document).ready(function () {
   $(".pick-a-color").pickAColor({
