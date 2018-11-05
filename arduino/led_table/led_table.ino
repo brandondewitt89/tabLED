@@ -106,7 +106,8 @@ void webSocketEvent(uint8_t num, WStype_t type, uint8_t * payload, size_t length
 void setup() {
 
     WiFiManager wifiManager;
-    //wifiManager.resetSettings();
+//    wifiManager.resetSettings();
+//    wifiManager.setAPStaticIPConfig(IPAddress(10,0,1,1), IPAddress(10,0,1,1), IPAddress(255,255,255,0));
     wifiManager.autoConnect("tabLED");
 
     while (WiFi.status() != WL_CONNECTED) {
@@ -133,10 +134,13 @@ void setup() {
     }
 
     webSocket.begin();
+//    Serial.printf("IP address:\t");
+//    Serial.println(WiFi.localIP());  
     webSocket.onEvent(webSocketEvent);
+//    Serial.printf("IP address:\t");
+//    Serial.println(WiFi.localIP());  
 }
 
 void loop() {
     webSocket.loop();
 }
-
