@@ -26,14 +26,15 @@
 
 
 
-      const host = '192.168.0.24';
+      const host = '192.168.0.56';
+      // const host = 'tabLED';
       const port = '81';
 
       const address = 'ws://'+host+':'+port;
       this._socket = new WebSocket(address);
       this._ready = false;
       this._socket.addEventListener('open', (event) => {
-        this._ready = true;
+      this._ready = true;
       });
     }
 
